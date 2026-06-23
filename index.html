@@ -3,815 +3,469 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FORGE — The 80/20 CEO Operating System | The 80/20 Institute</title>
-<meta name="description" content="FORGE is the 12-week operating system for CEOs of companies up to $20M — and division leaders inside larger ones. Install the system Bill Canady used to create $3B+ in shareholder value. Book your fit call." />
-<meta property="og:title" content="FORGE — The 80/20 CEO Operating System" />
-<meta property="og:description" content="Install the operating system, not another book. 12 weeks. Built by Bill Canady." />
-<meta property="og:type" content="website" />
-<meta property="og:image" content="https://the8020institute.com/wp-content/uploads/2026/04/Featured-Image-ETI.png" />
+<title>The FORGE Intake · The 80/20 Institute</title>
+<meta name="description" content="The FORGE Intake — a 15-minute, 5-question diagnostic that shows you exactly where your business stands. Built by Bill Canady." />
 
-<!-- ============================================================
-     FORGE LANDING PAGE  ·  forge.8020institute.com
-     The 80/20 Institute  ·  Built for Bill Canady
+<!-- =================================================================
+     THE FORGE INTAKE  ·  forge.the8020institute.com/intake
+     A real 5-question diagnostic. Produces a branded PDF, captures to
+     HubSpot, and routes to scheduling. Smart standard-copy insights.
 
-     >>> INTEGRATION CONFIG — EDIT THESE 3 VALUES BEFORE GOING LIVE <<<
-     See the <script> CONFIG block near the bottom of this file:
-        1. ICLOSED_EMBED_URL   — your iClosed scheduler embed link
-        2. HUBSPOT_PORTAL_ID   — your HubSpot Hub/Portal ID
-        3. HUBSPOT_FORM_ID     — the HubSpot form GUID for FORGE intake
-        (optional) VIMEO_VIDEO_ID — the overview video id
-     ============================================================ -->
+     >>> CONFIG is at the bottom of this file (HubSpot form id + iClosed). <<<
+     ================================================================= -->
 
-<!-- Brand font: Proxima Nova. If you have the 80/20 Adobe Fonts (Typekit) kit,
-     drop its <link rel="stylesheet" href="https://use.typekit.net/XXXX.css"> here
-     and the page renders in true Proxima Nova. Mulish is loaded as the close fallback. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
   :root{
-    /* Official 80/20 Institute palette (Brand Guidelines v1.0) */
-    --indigo:#001D3D;      /* Indigo  — deep brand navy */
-    --cobalt:#0B4B88;      /* Cobalt  — brand blue */
-    --gold:#FFC61B;        /* Citrine — brand yellow */
-    --cream:#F5E6C5;       /* Cream */
-    --graphite:#3A3A3A;    /* Graphite — body text */
-    --logo-navy:#28334F;
-    /* Working tokens */
-    --navy:#001D3D;
-    --navy-deep:#00152c;
-    --navy-soft:#0B4B88;
-    --gold-deep:#caa017;
-    --cream-soft:#FBF7EC;
-    --ink:#3A3A3A;
-    --muted:#5c6470;
-    --line:#e7e3d8;
-    --white:#ffffff;
-    --maxw:1140px;
-    --r:14px;
-    --shadow:0 18px 50px rgba(0,29,61,.16);
-    --shadow-sm:0 6px 22px rgba(0,29,61,.10);
-    /* Brand 3D-hexagon texture, rebuilt in CSS (scalable, lightweight) */
+    --indigo:#001D3D; --navy:#001D3D; --navy-deep:#00152c; --cobalt:#0B4B88;
+    --gold:#FFC61B; --gold-deep:#caa017; --cream:#F5E6C5; --cream-soft:#FBF7EC;
+    --graphite:#3A3A3A; --logo-navy:#28334F; --ink:#3A3A3A; --muted:#5c6470;
+    --line:#e7e3d8; --white:#fff; --r:14px;
+    --shadow:0 18px 50px rgba(0,29,61,.16); --shadow-sm:0 6px 22px rgba(0,29,61,.10);
     --hex:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='96' viewBox='0 0 56 96'><g fill='none' stroke='%23ffffff' stroke-opacity='0.05' stroke-width='1.4'><path d='M28 1 L52 15 L52 43 L28 57 L4 43 L4 15 Z'/><path d='M28 49 L52 63 L52 91 L28 105 L4 91 L4 63 Z'/></g></svg>");
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{
-    font-family:"proxima-nova","Mulish",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;
-  }
-  h1,h2,h3,h4,.display{font-family:"proxima-nova","Mulish",system-ui,sans-serif;line-height:1.08;letter-spacing:-.01em;text-wrap:balance}
-  p,.lead,.sub,li,blockquote{text-wrap:pretty}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  .eyebrow{font-family:"proxima-nova","Mulish";font-weight:800;text-transform:uppercase;letter-spacing:.18em;font-size:.74rem;color:var(--gold-deep)}
-  .eyebrow.on-navy{color:var(--gold)}
-  .section{padding:88px 0}
-  .section.tight{padding:64px 0}
-  .center{text-align:center}
-  .lead{font-size:1.16rem;color:var(--muted);max-width:720px}
-  .center .lead{margin-left:auto;margin-right:auto}
+  body{font-family:"proxima-nova","Mulish",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--hex) repeat,linear-gradient(165deg,var(--indigo),var(--navy-deep));
+    min-height:100vh;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:"proxima-nova","Mulish",system-ui,sans-serif;line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
+  p,li{text-wrap:pretty}
+  .wrap{max-width:760px;margin:0 auto;padding:38px 22px 80px}
+  .topbar{display:flex;justify-content:center;padding:26px 22px 6px}
+  .topbar svg{height:40px;width:auto}
+
+  .card{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:40px;margin-top:22px}
+  @media(max-width:560px){.card{padding:26px}}
+  .eyebrow{font-family:"proxima-nova","Mulish";font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;color:var(--gold-deep)}
+  .scene{display:none}.scene.active{display:block}
+
+  .lead{font-size:1.08rem;color:var(--muted)}
+  h1.title{font-size:clamp(1.9rem,4.5vw,2.6rem);font-weight:900;color:var(--navy);margin:12px 0}
+  .frame{background:var(--cream-soft);border-left:4px solid var(--gold);border-radius:0 12px 12px 0;padding:18px 20px;margin:20px 0;color:var(--navy);font-size:1rem}
+  .tip{font-size:.9rem;color:var(--muted);margin-top:18px;display:flex;gap:10px;align-items:flex-start}
+  .tip b{color:var(--navy)}
 
   /* Buttons */
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
-    font-family:"proxima-nova","Mulish";font-weight:800;font-size:1rem;border-radius:999px;
-    padding:16px 30px;cursor:pointer;border:2px solid transparent;transition:.18s ease;white-space:nowrap}
-  .btn-gold{background:var(--gold);color:var(--navy)}
-  .btn-gold:hover{background:var(--gold-deep);transform:translateY(-2px)}
-  .btn-ghost{background:transparent;color:var(--white);border-color:rgba(255,255,255,.35)}
-  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-  .btn-navy{background:var(--navy);color:var(--white)}
-  .btn-navy:hover{background:var(--navy-deep);transform:translateY(-2px)}
-  .btn-lg{padding:19px 38px;font-size:1.08rem}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:"proxima-nova","Mulish";
+    font-weight:800;font-size:1rem;border-radius:999px;padding:15px 32px;cursor:pointer;border:2px solid transparent;transition:.18s}
+  .btn-gold{background:var(--gold);color:var(--navy)} .btn-gold:hover{background:var(--gold-deep);transform:translateY(-2px)}
+  .btn-navy{background:var(--navy);color:#fff} .btn-navy:hover{background:var(--navy-deep);transform:translateY(-2px)}
+  .btn-ghost{background:transparent;color:var(--navy);border-color:var(--line)} .btn-ghost:hover{border-color:var(--gold)}
+  .btn-lg{padding:17px 38px;font-size:1.06rem}
+  .row{display:flex;justify-content:space-between;gap:12px;margin-top:26px;align-items:center}
 
-  /* Header */
-  header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);
-    backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
-  .nav .logo-svg{height:42px;width:auto;display:block}
-  .nav .right{display:flex;align-items:center;gap:18px}
-  .nav .lnk{font-weight:600;font-size:.95rem;color:var(--navy)}
-  .nav .lnk:hover{color:var(--gold-deep)}
-  .nav .btn{padding:11px 22px;font-size:.92rem}
-  @media(max-width:720px){.nav .lnk{display:none}}
+  /* Progress */
+  .prog{height:7px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:8px}
+  .prog>span{display:block;height:100%;background:var(--gold);width:0;transition:.35s}
+  .qcount{font-size:.82rem;color:var(--muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:20px;display:block}
 
-  /* Hero */
-  .hero{background:var(--hex) repeat,radial-gradient(120% 130% at 80% -10%,rgba(11,75,136,.5) 0,transparent 55%),linear-gradient(160deg,var(--indigo) 0%,var(--navy-deep) 100%);color:var(--white);position:relative;overflow:hidden}
-  .hero::after{content:"";position:absolute;right:-12%;top:-30%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(255,198,27,.18),transparent 65%)}
-  .hero .wrap{position:relative;z-index:2;padding-top:84px;padding-bottom:90px}
-  .hero h1{font-weight:900;font-size:clamp(2.5rem,6vw,4.2rem);max-width:15ch;margin:18px 0 0}
-  .hero h1 .hl{color:var(--gold)}
-  .hero .sub{font-size:1.22rem;color:#d7dcea;max-width:60ch;margin:22px 0 0}
-  .hero .ctas{display:flex;flex-wrap:wrap;gap:14px;margin:34px 0 0}
-  .hero .meta{margin:30px 0 0;display:flex;flex-wrap:wrap;gap:8px 26px;font-weight:600;color:#c4cbdd;font-size:.96rem}
-  .hero .meta b{color:var(--white)}
-  .hero .meta .dot{color:var(--gold)}
+  .qkicker{font-family:"proxima-nova","Mulish";font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.74rem;color:var(--gold-deep)}
+  .qtext{font-size:1.32rem;font-weight:800;color:var(--navy);margin:8px 0 6px;line-height:1.28}
+  .qhint{color:var(--muted);font-size:.96rem;margin-bottom:18px}
+  textarea{width:100%;min-height:120px;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;font-family:inherit;font-size:1.02rem;color:var(--ink);resize:vertical}
+  textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,198,27,.2)}
+  .truth{margin-top:18px}
+  .truth>.lbl{font-weight:700;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+  .opt{display:flex;gap:12px;align-items:flex-start;border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:.15s}
+  .opt:hover{border-color:var(--gold)}
+  .opt.sel{border-color:var(--gold);background:var(--cream-soft)}
+  .opt input{margin-top:4px;accent-color:var(--gold-deep);width:18px;height:18px;flex:none}
+  .opt span{color:var(--navy);font-size:1rem}
 
-  /* Trust strip */
-  .trust{background:var(--navy-deep);color:#aeb6c9;padding:18px 0;border-top:1px solid rgba(255,255,255,.06)}
-  .trust .wrap{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 30px;text-align:center}
-  .trust b{color:var(--gold);font-family:"proxima-nova","Mulish";font-weight:800}
-  .trust .as{font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
-
-  /* Problem */
-  .prob ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 30px;margin-top:30px}
-  .prob li{position:relative;padding-left:34px;font-size:1.05rem;color:#39414f}
-  .prob li::before{content:"";position:absolute;left:0;top:9px;width:18px;height:18px;border-radius:50%;
-    background:var(--gold);box-shadow:inset 0 0 0 5px var(--navy)}
-  @media(max-width:680px){.prob ul{grid-template-columns:1fr}}
-
-  /* Video */
-  .video{background:var(--cream-soft)}
-  .video-frame{margin-top:34px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:var(--navy);
-    position:relative;aspect-ratio:16/9}
-  .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-  .video-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-    gap:16px;color:#fff;background:linear-gradient(160deg,var(--navy),var(--navy-deep));text-align:center;padding:24px}
-  .video-ph .play{width:84px;height:84px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center}
-  .video-ph .play svg{margin-left:5px}
-  .video-ph small{color:#aeb6c9;max-width:46ch}
-
-  /* Disciplines */
-  .disc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:40px}
-  .disc{background:var(--white);border:1px solid var(--line);border-radius:var(--r);padding:26px 22px;box-shadow:var(--shadow-sm);transition:.18s}
-  .disc:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#d4dae6}
-  .disc .ltr{font-family:"proxima-nova","Mulish";font-weight:900;font-size:2.4rem;color:var(--gold);line-height:1}
-  .disc h3{font-size:1.12rem;margin:12px 0 8px;color:var(--navy)}
-  .disc p{font-size:.95rem;color:var(--muted)}
-  @media(max-width:980px){.disc-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.disc-grid{grid-template-columns:1fr}}
-
-  /* Who it's for */
-  .who{background:var(--hex) repeat,var(--indigo);color:#fff}
-  .who .lead{color:#c4cbdd}
-  .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
-  .who-card{background:linear-gradient(160deg,var(--navy-soft),#2a3350);border:1px solid rgba(255,255,255,.09);
-    border-radius:var(--r);padding:28px}
-  .who-card .n{font-family:"proxima-nova","Mulish";font-weight:900;color:var(--gold);font-size:1.1rem}
-  .who-card h3{margin:6px 0 8px;font-size:1.28rem}
-  .who-card p{color:#c4cbdd;font-size:1rem}
-  @media(max-width:760px){.who-grid{grid-template-columns:1fr}}
-
-  /* Outcomes */
-  .out-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:38px}
-  .out{border:1px solid var(--line);border-radius:var(--r);padding:22px 18px;background:var(--cream-soft)}
-  .out .num{font-family:"proxima-nova","Mulish";font-weight:900;color:var(--gold-deep);font-size:1rem;letter-spacing:.04em}
-  .out p{margin-top:10px;font-weight:600;color:var(--navy);font-size:1rem;line-height:1.35}
-  @media(max-width:980px){.out-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.out-grid{grid-template-columns:1fr}}
-
-  /* 12-week */
-  .weeks{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:38px}
-  .wk{border-radius:var(--r);padding:22px 18px;color:#fff;background:linear-gradient(165deg,var(--navy),var(--navy-deep));border:1px solid rgba(255,255,255,.08)}
-  .wk .tag{font-family:"proxima-nova","Mulish";font-weight:800;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
-  .wk h4{font-size:1.18rem;margin:8px 0 6px}
-  .wk p{color:#c4cbdd;font-size:.9rem}
-  .wk .cap{margin-top:12px;font-size:.82rem;color:#fff;border-top:1px solid rgba(255,255,255,.12);padding-top:10px}
-  .wk .cap b{color:var(--gold)}
-  @media(max-width:980px){.weeks{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.weeks{grid-template-columns:1fr}}
-
-  /* Rule of Three */
-  .r3{background:var(--cream-soft)}
-  .r3-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:38px}
-  .r3-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px;box-shadow:var(--shadow-sm)}
-  .r3-card .role{font-family:"proxima-nova","Mulish";font-weight:900;font-size:1.4rem;color:var(--navy)}
-  .r3-card .hz{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-deep);margin:4px 0 12px}
-  .r3-card p{color:var(--muted)}
-  @media(max-width:760px){.r3-grid{grid-template-columns:1fr}}
-
-  /* Bill */
-  .bill .row{display:grid;grid-template-columns:0.85fr 1.15fr;gap:40px;align-items:center}
-  .bill img{width:100%;border-radius:18px;box-shadow:var(--shadow)}
-  .bill ul{list-style:none;margin:20px 0 0;display:grid;gap:10px}
-  .bill li{padding-left:30px;position:relative;color:#39414f}
-  .bill li::before{content:"\2713";position:absolute;left:0;top:0;color:var(--gold-deep);font-weight:800}
-  .bill .books{margin-top:18px;font-weight:600;color:var(--navy)}
-  @media(max-width:820px){.bill .row{grid-template-columns:1fr}}
-
-  /* Enroll steps */
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
-  .step{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:28px;background:#fff;box-shadow:var(--shadow-sm)}
-  .step .s{font-family:"proxima-nova","Mulish";font-weight:900;font-size:2.6rem;color:#e9edf4;line-height:.8}
-  .step h3{margin:10px 0 8px;color:var(--navy);font-size:1.2rem}
-  .step p{color:var(--muted);font-size:.98rem}
-  @media(max-width:760px){.steps{grid-template-columns:1fr}}
-
-  /* Apply / form + booking */
-  .apply{background:var(--hex) repeat,linear-gradient(160deg,var(--indigo),var(--navy-deep));color:#fff}
-  .apply .grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:42px;align-items:start}
-  .panel{background:#fff;color:var(--ink);border-radius:18px;padding:30px;box-shadow:var(--shadow)}
-  .panel h3{color:var(--navy);font-size:1.4rem}
-  .panel .sub{color:var(--muted);font-size:.98rem;margin:6px 0 18px}
   .field{margin-bottom:14px}
-  .field label{display:block;font-weight:600;font-size:.9rem;color:var(--navy);margin-bottom:6px}
-  .field input,.field select,.field textarea{width:100%;padding:13px 14px;border:1.5px solid var(--line);
-    border-radius:10px;font-family:inherit;font-size:.98rem;color:var(--ink);background:#fff;transition:.15s}
-  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(248,192,24,.18)}
-  .field.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .field.two > div{margin:0}
-  .req{color:#d33}
-  .step-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-  .step-head .count{font-size:.82rem;color:var(--muted);font-weight:600}
-  .progress{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:20px}
-  .progress > span{display:block;height:100%;background:var(--gold);width:33%;transition:.3s}
-  .fstep{display:none}.fstep.active{display:block}
-  .form-nav{display:flex;justify-content:space-between;gap:12px;margin-top:8px}
-  .form-note{font-size:.82rem;color:var(--muted);margin-top:14px;text-align:center}
-  .success{display:none;text-align:center;padding:18px 0}
-  .success .chk{width:64px;height:64px;border-radius:50%;background:var(--gold);display:inline-flex;align-items:center;justify-content:center;margin-bottom:14px}
-  .booking{background:#fff;color:var(--ink);border-radius:18px;padding:30px;box-shadow:var(--shadow)}
-  .booking h3{color:var(--navy);font-size:1.4rem}
-  .booking .sub{color:var(--muted);margin:6px 0 18px;font-size:.98rem}
-  .ical-frame{border-radius:12px;overflow:hidden;border:1px solid var(--line);min-height:560px;position:relative}
-  .ical-frame iframe{width:100%;min-height:620px;border:0;display:block}
-  .ical-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:28px;color:var(--muted);background:var(--cream-soft)}
-  @media(max-width:820px){.apply .grid{grid-template-columns:1fr}}
+  .field label{display:block;font-weight:700;font-size:.9rem;color:var(--navy);margin-bottom:6px}
+  .field input{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:1rem}
+  .field input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,198,27,.2)}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:520px){.two{grid-template-columns:1fr}}
+  .err{color:#c0392b;font-size:.85rem;margin-top:4px;display:none}
 
-  /* FAQ */
-  details{border:1px solid var(--line);border-radius:12px;padding:0;margin-bottom:12px;background:#fff;overflow:hidden}
-  details summary{cursor:pointer;list-style:none;padding:20px 24px;font-family:"proxima-nova","Mulish";font-weight:700;font-size:1.06rem;color:var(--navy);display:flex;justify-content:space-between;align-items:center;gap:16px}
-  details summary::-webkit-details-marker{display:none}
-  details summary::after{content:"+";font-size:1.5rem;color:var(--gold-deep);font-weight:700;line-height:1}
-  details[open] summary::after{content:"\2013"}
-  details .ans{padding:0 24px 22px;color:var(--muted)}
+  .spin{display:inline-block;width:18px;height:18px;border:3px solid rgba(0,29,61,.25);border-top-color:var(--navy);border-radius:50%;animation:sp 0.8s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
 
-  /* Testimonials */
-  .tmoni{background:var(--cream-soft)}
-  .quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:38px 0 26px}
-  .qcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
-  .qcard .stars{color:var(--gold);font-size:1.05rem;letter-spacing:3px}
-  .qcard blockquote{font-size:1.06rem;color:#2c3340;margin:12px 0 16px;line-height:1.5;flex:1}
-  .qwho{font-weight:700;color:var(--navy);font-size:.98rem}
-  .qwho span{display:block;font-weight:500;color:var(--muted);font-size:.88rem;margin-top:2px}
-  .senja-wrap{margin-top:10px}
-  @media(max-width:820px){.quote-grid{grid-template-columns:1fr}}
-  .founder-note{margin-top:18px;padding:16px 20px;border-left:4px solid var(--gold);background:#fff;border-radius:0 10px 10px 0;font-style:italic;color:var(--navy)}
-  .founder-note b{font-style:normal}
-
-  /* Final CTA */
-  .final{background:var(--hex) repeat,linear-gradient(160deg,var(--navy-deep),#001024);color:#fff;text-align:center}
-  .final h2{font-size:clamp(2rem,4.5vw,3rem);font-weight:900;max-width:18ch;margin:14px auto 0}
-  .final .ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
-
-  /* Footer */
-  footer.site{background:#11151f;color:#9aa3b6;padding:54px 0 30px}
-  footer .top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;padding-bottom:30px;border-bottom:1px solid rgba(255,255,255,.08)}
-  footer .logo-svg{height:40px;width:auto;margin-bottom:16px;display:block}
-  footer h5{font-family:"proxima-nova","Mulish";color:#fff;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
-  footer a{display:block;color:#9aa3b6;font-size:.95rem;margin-bottom:8px}
-  footer a:hover{color:var(--gold)}
-  footer .legal{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;padding-top:20px;font-size:.84rem}
-  @media(max-width:760px){footer .top{grid-template-columns:1fr}}
-
-  .sec-head{max-width:760px}
-  .sec-head h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:800;color:var(--navy);margin-top:14px}
-  .center .sec-head{margin:0 auto}
+  /* ===== RESULTS DOCUMENT ===== */
+  #resultsScene .actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:22px 0 6px}
+  #doc{background:#fff;border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+  .doc-hero{background:var(--hex) repeat,linear-gradient(160deg,var(--indigo),var(--navy-deep));color:#fff;padding:44px 44px 40px;position:relative}
+  .doc-hero svg.logo{height:38px;margin-bottom:26px}
+  .doc-hero .eyebrow{color:var(--gold)}
+  .doc-hero h1{font-size:2.1rem;font-weight:900;margin:10px 0 6px}
+  .doc-hero .who{color:#c4cbdd;font-size:1rem}
+  .doc-body{padding:36px 44px 10px}
+  @media(max-width:560px){.doc-hero{padding:30px 24px}.doc-body{padding:26px 24px 6px}}
+  .doc-intro{color:var(--graphite);font-size:1.02rem;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:6px}
+  .dim{padding:24px 0;border-bottom:1px solid var(--line)}
+  .dim .dk{font-family:"proxima-nova","Mulish";font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.72rem;color:var(--gold-deep)}
+  .dim h3{font-size:1.18rem;color:var(--navy);margin:4px 0 12px}
+  .dim .ans{background:var(--cream-soft);border-radius:10px;padding:12px 15px;color:var(--navy);font-size:.97rem;margin-bottom:12px;white-space:pre-wrap}
+  .dim .ans .ansk{display:block;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .dim .ins{color:var(--graphite);font-size:1rem}
+  .dim .ins .insk{display:block;font-weight:800;color:var(--navy);font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+  .readbox{background:var(--indigo);color:#fff;border-radius:14px;padding:26px 28px;margin:26px 0}
+  .readbox .eyebrow{color:var(--gold)}
+  .readbox h3{color:#fff;font-size:1.3rem;margin:8px 0 10px}
+  .readbox p{color:#dfe5ef}
+  .nextbox{padding:22px 0 30px}
+  .nextbox h3{color:var(--navy);font-size:1.2rem;margin-bottom:8px}
+  .nextbox ul{margin:12px 0 0 18px;color:var(--graphite)}
+  .nextbox li{margin-bottom:7px}
+  .doc-foot{background:var(--cream-soft);padding:18px 44px;color:var(--muted);font-size:.82rem;text-align:center}
+  .saved{font-size:.86rem;color:var(--muted);text-align:center;margin-top:14px}
+  .saved.ok{color:#1c7c4a}
 </style>
 </head>
 <body>
 
-<!-- ============ HEADER ============ -->
-<header class="site">
-  <div class="wrap nav">
-    <a href="https://the8020institute.com" aria-label="The 80/20 Institute" class="logo">
-      <svg class="logo-svg" viewBox="0 0 645 200" role="img" aria-label="The 80/20 Institute" xmlns="http://www.w3.org/2000/svg">
-        <g fill="#28334F">
-          <path d="M165.55 152.146L82.7828 200.001L0 152.146V56.4524L82.7828 8.61328V27.9535L16.733 66.1225V142.476L82.7828 180.661L95.6907 173.197V59.3313L121.528 77.9699V158.256L148.817 142.476V66.1225L134.747 56.4369V33.9973L165.55 56.4524V152.146Z"/>
-          <path d="M204.88 94.1134C204.88 88.7134 208.705 84.0634 214.405 81.6634C209.155 79.4884 205.705 75.9634 205.705 70.1135C205.705 60.2885 216.88 56.6885 227.155 56.6885C237.429 56.6885 248.604 60.2885 248.604 70.1135C248.604 75.9634 245.079 79.4884 239.829 81.6634C245.529 84.0634 249.429 88.7134 249.429 94.1134C249.429 104.313 238.254 108.363 227.155 108.363C216.055 108.363 204.88 104.313 204.88 94.1134ZM233.155 72.3634C233.155 70.4135 230.905 68.9885 227.155 68.9885C223.33 68.9885 221.08 70.4135 221.08 72.3634C221.08 74.3134 224.08 75.8884 227.155 76.3384C230.23 75.8884 233.155 74.3134 233.155 72.3634ZM234.055 92.4634C234.055 90.1384 230.305 88.5634 227.155 88.1134C223.93 88.5634 220.255 90.1384 220.255 92.4634C220.255 94.6384 222.88 96.0634 227.155 96.0634C231.28 96.0634 234.055 94.6384 234.055 92.4634Z"/>
-          <path d="M252.121 82.4884C252.121 68.9135 259.396 56.6885 274.321 56.6885C289.246 56.6885 296.521 68.9135 296.521 82.4884C296.521 96.0634 289.246 108.363 274.321 108.363C259.396 108.363 252.121 96.0634 252.121 82.4884ZM281.296 82.4884C281.296 74.0135 279.121 70.0385 274.321 70.0385C269.521 70.0385 267.346 74.0135 267.346 82.4884C267.346 90.9634 269.521 95.0134 274.321 95.0134C279.121 95.0134 281.296 90.9634 281.296 82.4884Z"/>
-          <path d="M307.24 108.963H297.865L315.64 55.9385H325.015L307.24 108.963Z"/>
-          <path d="M368.988 107.463H328.113V95.6884C350.988 79.5634 353.163 77.6884 353.163 73.9384C353.163 71.5384 350.613 70.0385 347.088 70.0385C342.063 70.0385 338.013 71.9885 334.188 75.2134L325.938 65.1635C331.713 59.0135 340.113 56.6885 347.088 56.6885C360.063 56.6885 368.538 63.8885 368.538 73.9384C368.538 80.7634 364.638 86.3884 351.213 94.2634H368.988V107.463Z"/>
-          <path d="M372.384 82.4884C372.384 68.9135 379.659 56.6885 394.584 56.6885C409.509 56.6885 416.784 68.9135 416.784 82.4884C416.784 96.0634 409.509 108.363 394.584 108.363C379.659 108.363 372.384 96.0634 372.384 82.4884ZM401.559 82.4884C401.559 74.0135 399.384 70.0385 394.584 70.0385C389.784 70.0385 387.609 74.0135 387.609 82.4884C387.609 90.9634 389.784 95.0134 394.584 95.0134C399.384 95.0134 401.559 90.9634 401.559 82.4884Z"/>
-          <path d="M222.93 172.113H207.78V122.088H222.93V172.113Z"/>
-          <path d="M286.647 172.113H272.097L253.647 145.263V172.113H238.497V122.088H254.097L271.497 147.288V122.088H286.647V172.113Z"/>
-          <path d="M298.422 165.063L306.297 153.813C310.047 157.413 315.672 160.263 322.422 160.263C325.272 160.263 327.972 159.288 327.972 157.338C327.972 155.388 325.872 154.413 320.922 153.513C312.672 152.013 300.072 150.063 300.072 137.538C300.072 129.063 307.122 121.338 320.847 121.338C329.022 121.338 336.372 123.663 342.072 128.313L333.972 139.038C329.622 135.738 323.997 134.088 320.022 134.088C316.272 134.088 315.447 135.438 315.447 136.713C315.447 138.663 317.472 139.338 322.797 140.238C331.047 141.663 343.272 144.063 343.272 155.613C343.272 166.638 335.097 173.013 321.672 173.013C311.022 173.013 303.747 169.863 298.422 165.063Z"/>
-          <path d="M381.618 172.113H366.468V135.288H353.043V122.088H394.968V135.288H381.618V172.113Z"/>
-          <path d="M422.998 172.113H407.848V122.088H422.998V172.113Z"/>
-          <path d="M464.44 172.113H449.29V135.288H435.865V122.088H477.79V135.288H464.44V172.113Z"/>
-          <path d="M490.67 151.563V122.088H506.045V151.038C506.045 155.838 508.52 159.663 514.745 159.663C520.894 159.663 523.37 155.838 523.37 151.038V122.088H538.744V151.488C538.744 163.938 531.619 173.013 514.745 173.013C497.87 173.013 490.67 163.938 490.67 151.563Z"/>
-          <path d="M580.221 172.113H565.071V135.288H551.646V122.088H593.571V135.288H580.221V172.113Z"/>
-          <path d="M644.4 172.113H606.451V122.088H644.4V134.688H621.6V140.538H643.875V153.138H621.6V159.513H644.4V172.113Z"/>
-          <path d="M218.427 42.8579H210.172V23.9288H202.857V17.1436H225.701V23.9288H218.427V42.8579Z"/>
-          <path d="M254.909 42.8579H246.654V33.0271H236.887V42.8579H228.632V17.1436H236.887V26.2419H246.654V17.1436H254.909V42.8579Z"/>
-          <path d="M280 42.8579H259.322V17.1436H280V23.6204H267.577V26.6275H279.714V33.1042H267.577V36.3812H280V42.8579Z"/>
-        </g>
-        <path d="M121.528 59.3301L95.6904 39.2182V0L121.528 20.1738V59.3301Z" fill="#FFC61B"/>
-      </svg>
-    </a>
-    <div class="right">
-      <a class="lnk" href="#disciplines">The System</a>
-      <a class="lnk" href="#who">Who It's For</a>
-      <a class="lnk" href="#testimonials">Results</a>
-      <a class="lnk" href="#faq">FAQ</a>
-      <a class="btn btn-navy" href="#apply">Book Your Fit Call</a>
-    </div>
-  </div>
-</header>
-
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="wrap">
-    <span class="eyebrow on-navy">The 80/20 CEO Operating System</span>
-    <h1>Earn the Right to Grow. <span class="hl">Build the Business You Set Out to Build.</span></h1>
-    <p class="sub">This is the most important job you've ever taken on, and the whole thing is riding on you. FORGE is the 12-week system that takes your company from a job that's consuming you to a real business — real processes, a real team, and a real plan to reach everything you're after.</p>
-    <div class="ctas">
-      <a class="btn btn-gold btn-lg" href="/intake.html">Start My Intake</a>
-      <a class="btn btn-ghost btn-lg" href="https://app.iclosed.io/e/The8020institute/forge" target="_blank" rel="noopener">Book My Call</a>
-      <a class="btn btn-ghost btn-lg" href="#video">Watch the Overview</a>
-    </div>
-    <div class="meta">
-      <span><span class="dot">●</span> <b>12 weeks</b>, self-paced</span>
-      <span><span class="dot">●</span> <b>5 real deliverables</b> — your full plan</span>
-      <span><span class="dot">●</span> Inside <b>The 80/20 Institute</b></span>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TRUST ============ -->
-<div class="trust">
-  <div class="wrap">
-    <span class="as">The system behind <b>$3B+</b> in shareholder value</span>
-    <span class="as">As seen in: Forbes · Fortune · WSJ · Fast Company · Yahoo Finance</span>
-  </div>
+<div class="topbar">
+  <!-- 80/20 Institute logo (white, for dark bg) -->
+  <svg viewBox="0 0 645 200" xmlns="http://www.w3.org/2000/svg" aria-label="The 80/20 Institute">
+    <g fill="#ffffff">
+      <path d="M165.55 152.146L82.7828 200.001L0 152.146V56.4524L82.7828 8.61328V27.9535L16.733 66.1225V142.476L82.7828 180.661L95.6907 173.197V59.3313L121.528 77.9699V158.256L148.817 142.476V66.1225L134.747 56.4369V33.9973L165.55 56.4524V152.146Z"/>
+      <path d="M204.88 94.1134C204.88 88.7134 208.705 84.0634 214.405 81.6634C209.155 79.4884 205.705 75.9634 205.705 70.1135C205.705 60.2885 216.88 56.6885 227.155 56.6885C237.429 56.6885 248.604 60.2885 248.604 70.1135C248.604 75.9634 245.079 79.4884 239.829 81.6634C245.529 84.0634 249.429 88.7134 249.429 94.1134C249.429 104.313 238.254 108.363 227.155 108.363C216.055 108.363 204.88 104.313 204.88 94.1134ZM233.155 72.3634C233.155 70.4135 230.905 68.9885 227.155 68.9885C223.33 68.9885 221.08 70.4135 221.08 72.3634C221.08 74.3134 224.08 75.8884 227.155 76.3384C230.23 75.8884 233.155 74.3134 233.155 72.3634ZM234.055 92.4634C234.055 90.1384 230.305 88.5634 227.155 88.1134C223.93 88.5634 220.255 90.1384 220.255 92.4634C220.255 94.6384 222.88 96.0634 227.155 96.0634C231.28 96.0634 234.055 94.6384 234.055 92.4634Z"/>
+      <path d="M252.121 82.4884C252.121 68.9135 259.396 56.6885 274.321 56.6885C289.246 56.6885 296.521 68.9135 296.521 82.4884C296.521 96.0634 289.246 108.363 274.321 108.363C259.396 108.363 252.121 96.0634 252.121 82.4884ZM281.296 82.4884C281.296 74.0135 279.121 70.0385 274.321 70.0385C269.521 70.0385 267.346 74.0135 267.346 82.4884C267.346 90.9634 269.521 95.0134 274.321 95.0134C279.121 95.0134 281.296 90.9634 281.296 82.4884Z"/>
+      <path d="M307.24 108.963H297.865L315.64 55.9385H325.015L307.24 108.963Z"/>
+      <path d="M368.988 107.463H328.113V95.6884C350.988 79.5634 353.163 77.6884 353.163 73.9384C353.163 71.5384 350.613 70.0385 347.088 70.0385C342.063 70.0385 338.013 71.9885 334.188 75.2134L325.938 65.1635C331.713 59.0135 340.113 56.6885 347.088 56.6885C360.063 56.6885 368.538 63.8885 368.538 73.9384C368.538 80.7634 364.638 86.3884 351.213 94.2634H368.988V107.463Z"/>
+      <path d="M372.384 82.4884C372.384 68.9135 379.659 56.6885 394.584 56.6885C409.509 56.6885 416.784 68.9135 416.784 82.4884C416.784 96.0634 409.509 108.363 394.584 108.363C379.659 108.363 372.384 96.0634 372.384 82.4884ZM401.559 82.4884C401.559 74.0135 399.384 70.0385 394.584 70.0385C389.784 70.0385 387.609 74.0135 387.609 82.4884C387.609 90.9634 389.784 95.0134 394.584 95.0134C399.384 95.0134 401.559 90.9634 401.559 82.4884Z"/>
+      <path d="M222.93 172.113H207.78V122.088H222.93V172.113Z"/>
+      <path d="M286.647 172.113H272.097L253.647 145.263V172.113H238.497V122.088H254.097L271.497 147.288V122.088H286.647V172.113Z"/>
+      <path d="M298.422 165.063L306.297 153.813C310.047 157.413 315.672 160.263 322.422 160.263C325.272 160.263 327.972 159.288 327.972 157.338C327.972 155.388 325.872 154.413 320.922 153.513C312.672 152.013 300.072 150.063 300.072 137.538C300.072 129.063 307.122 121.338 320.847 121.338C329.022 121.338 336.372 123.663 342.072 128.313L333.972 139.038C329.622 135.738 323.997 134.088 320.022 134.088C316.272 134.088 315.447 135.438 315.447 136.713C315.447 138.663 317.472 139.338 322.797 140.238C331.047 141.663 343.272 144.063 343.272 155.613C343.272 166.638 335.097 173.013 321.672 173.013C311.022 173.013 303.747 169.863 298.422 165.063Z"/>
+      <path d="M381.618 172.113H366.468V135.288H353.043V122.088H394.968V135.288H381.618V172.113Z"/>
+      <path d="M422.998 172.113H407.848V122.088H422.998V172.113Z"/>
+      <path d="M464.44 172.113H449.29V135.288H435.865V122.088H477.79V135.288H464.44V172.113Z"/>
+      <path d="M490.67 151.563V122.088H506.045V151.038C506.045 155.838 508.52 159.663 514.745 159.663C520.894 159.663 523.37 155.838 523.37 151.038V122.088H538.744V151.488C538.744 163.938 531.619 173.013 514.745 173.013C497.87 173.013 490.67 163.938 490.67 151.563Z"/>
+      <path d="M580.221 172.113H565.071V135.288H551.646V122.088H593.571V135.288H580.221V172.113Z"/>
+      <path d="M644.4 172.113H606.451V122.088H644.4V134.688H621.6V140.538H643.875V153.138H621.6V159.513H644.4V172.113Z"/>
+      <path d="M218.427 42.8579H210.172V23.9288H202.857V17.1436H225.701V23.9288H218.427V42.8579Z"/>
+      <path d="M254.909 42.8579H246.654V33.0271H236.887V42.8579H228.632V17.1436H236.887V26.2419H246.654V17.1436H254.909V42.8579Z"/>
+      <path d="M280 42.8579H259.322V17.1436H280V23.6204H267.577V26.6275H279.714V33.1042H267.577V36.3812H280V42.8579Z"/>
+    </g>
+    <path d="M121.528 59.3301L95.6904 39.2182V0L121.528 20.1738V59.3301Z" fill="#FFC61B"/>
+  </svg>
 </div>
 
-<!-- ============ PROBLEM ============ -->
-<section class="section prob">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">If this is you, keep reading</span>
-      <h2>You Built This Into a Job. Now It's Consuming You — and Scaling It Will Take More Than More Hours.</h2>
-    </div>
-    <ul>
-      <li>You're exhausted. You're carrying the whole thing, and the harder you push, the more it depends on you.</li>
-      <li>You're still the bottleneck. Decisions stack up waiting for you, and the business slows the moment you step away.</li>
-      <li>It's run like a job, not a business — no real processes, no real bench, nothing that holds without you in the room.</li>
-      <li>Your team is good. You're just not sure they're great, or how to tell the difference, or who should be doing what.</li>
-      <li>You're growing, but the margin isn't keeping up. More effort, less leverage.</li>
-      <li>You know where you want this to go. You're just not sure what to do next to actually get it there.</li>
-    </ul>
-  </div>
-</section>
+<div class="wrap">
 
-<!-- ============ VIDEO ============ -->
-<section class="section video" id="video">
-  <div class="wrap center">
-    <div class="sec-head center">
-      <span class="eyebrow">90 seconds with Bill</span>
-      <h2>What FORGE Actually Is</h2>
+  <!-- ===== WELCOME ===== -->
+  <section class="scene active card" id="welcomeScene">
+    <span class="eyebrow">The FORGE Intake</span>
+    <h1 class="title">Five questions. About fifteen minutes. The truth about where your business stands.</h1>
+    <p class="lead">This is Bill Canady's diagnostic — the five things he'd ask you first on a live call: your number, where your growth really comes from, your team, where you're the bottleneck, and what you actually want. It runs one question at a time.</p>
+    <div class="frame">This isn't a sales quiz. It's built to show you where you truly are — and the depth we work at inside FORGE. Vague answers produce a useless result. Talk like you would to another operator: numbers, names, dates.</div>
+    <p class="lead">At the end you get a branded diagnostic you can keep, you can book time with Bill, and Bill personally reviews every intake and reaches out.</p>
+    <div class="tip"><span>💬</span><span><b>Tip — talk instead of type.</b> Turn on voice-to-text and just speak your answers. Mac: the dictation key or <b>fn fn</b>. iPhone: the <b>mic</b> on the keyboard. Windows: <b>Win + H</b>.</span></div>
+    <div class="row"><span></span><button class="btn btn-gold btn-lg" onclick="start()">Begin the Intake →</button></div>
+  </section>
+
+  <!-- ===== QUESTION ===== -->
+  <section class="scene card" id="qScene">
+    <div class="prog"><span id="bar"></span></div>
+    <span class="qcount" id="qcount">Question 1 of 5</span>
+    <span class="qkicker" id="qkicker"></span>
+    <div class="qtext" id="qtext"></div>
+    <div class="qhint" id="qhint"></div>
+    <textarea id="qanswer" placeholder="In your own words… (speak or type)"></textarea>
+    <div class="truth">
+      <div class="lbl">Which is closest to the truth?</div>
+      <div id="qopts"></div>
+      <div class="err" id="qerr">Pick the one closest to the truth to continue.</div>
     </div>
-    <p class="lead">Not another course to collect. A system you install in 12 weeks and run for the rest of your career.</p>
-    <div class="video-frame" id="videoFrame">
-      <!-- Vimeo embed auto-loads when VIMEO_VIDEO_ID is set in CONFIG. Placeholder shows until then. -->
-      <div class="video-ph" id="videoPlaceholder">
-        <div class="play"><svg width="30" height="34" viewBox="0 0 30 34" fill="none"><path d="M28 14.5a3 3 0 010 5L5 32.7A3 3 0 010 30.2V3.8A3 3 0 015 1.3L28 14.5z" fill="#001D3D"/></svg></div>
-        <strong style="font-family:"proxima-nova","Mulish";font-size:1.25rem">Overview video goes here</strong>
-        <small>Drop your Vimeo video ID into the CONFIG block and this slot becomes the live player automatically.</small>
+    <div class="row">
+      <button class="btn btn-ghost" id="backBtn" onclick="back()">Back</button>
+      <button class="btn btn-navy" id="nextBtn" onclick="next()">Continue →</button>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="scene card" id="contactScene">
+    <span class="eyebrow">Last step</span>
+    <h1 class="title" style="font-size:1.7rem">Where should we send your diagnostic?</h1>
+    <p class="lead">Your results are ready. Tell us where to send them — and so Bill can reach out personally.</p>
+    <div style="margin-top:20px">
+      <div class="two">
+        <div class="field"><label>First name *</label><input id="firstname" /><div class="err" id="e_first">Required</div></div>
+        <div class="field"><label>Last name *</label><input id="lastname" /><div class="err" id="e_last">Required</div></div>
+      </div>
+      <div class="field"><label>Work email *</label><input id="email" type="email" /><div class="err" id="e_email">Enter a valid email</div></div>
+      <div class="two">
+        <div class="field"><label>Company</label><input id="company" /></div>
+        <div class="field"><label>Mobile phone</label><input id="phone" /></div>
       </div>
     </div>
-  </div>
-</section>
+    <div class="row">
+      <button class="btn btn-ghost" onclick="show('qScene'); cur=4; renderQ();">Back</button>
+      <button class="btn btn-gold" id="finishBtn" onclick="finish()">See My Results →</button>
+    </div>
+    <p class="saved" style="margin-top:16px">By submitting, you agree to be contacted about FORGE. We don't sell your data.</p>
+  </section>
 
-<!-- ============ DISCIPLINES ============ -->
-<section class="section" id="disciplines">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">The five disciplines</span>
-      <h2>FORGE Is Not a Framework. It's a System.</h2>
-      <p class="lead" style="margin-top:14px">Five disciplines. Each one earns the right to the next. You don't skip steps. You forge it.</p>
+  <!-- ===== RESULTS ===== -->
+  <section class="scene" id="resultsScene">
+    <div class="actions">
+      <button class="btn btn-gold" onclick="downloadPDF()" id="dlBtn">⬇ Download My Diagnostic (PDF)</button>
+      <a class="btn btn-navy" id="bookBtn" href="#" target="_blank" rel="noopener">Book Time With Bill →</a>
     </div>
-    <div class="disc-grid">
-      <div class="disc"><div class="ltr">F</div><h3>Focus</h3><p>Install the 80/20 mindset. Strip the business to the few things that drive the result. Find where you're personally the bottleneck.</p></div>
-      <div class="disc"><div class="ltr">O</div><h3>Objective</h3><p>Own the number. Align the owner or board. Align the team. Walk out with one goal everyone believes in.</p></div>
-      <div class="disc"><div class="ltr">R</div><h3>Roadmap</h3><p>Choose the critical few. Translate the goal into a one-page strategy your team will actually own.</p></div>
-      <div class="disc"><div class="ltr">G</div><h3>Govern</h3><p>Install the Rule of Three in your org chart. Right people, right seats. Fund the vital few, starve the rest.</p></div>
-      <div class="disc"><div class="ltr">E</div><h3>Execute</h3><p>Run the cadence. MBRs, QBRs, countermeasures. Make the system non-negotiable — so it runs without you in the room.</p></div>
+    <p class="saved" id="saveStatus">Saving your results…</p>
+    <div id="doc"><!-- built by JS --></div>
+    <div class="actions" style="margin-top:22px">
+      <button class="btn btn-gold" onclick="downloadPDF()">⬇ Download My Diagnostic (PDF)</button>
+      <a class="btn btn-navy" id="bookBtn2" href="#" target="_blank" rel="noopener">Book Time With Bill →</a>
     </div>
-  </div>
-</section>
+    <p class="saved">Bill reviews every intake personally and will also reach out to you directly.</p>
+  </section>
 
-<!-- ============ WHO IT'S FOR ============ -->
-<section class="section who" id="who">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow on-navy">Built for your seat</span>
-      <h2 style="color:#fff">This Is the Most Important Build of Your Career. FORGE Is How You Get It Right.</h2>
-      <p class="lead" style="margin-top:14px">For CEOs and owners of companies up to $20M, and the leaders running a P&amp;L inside a larger company. Wherever you are in the climb, this is the system that turns the business you've built into the business you set out to build.</p>
-    </div>
-    <div class="who-grid">
-      <div class="who-card"><div class="n">01</div><h3>The Founder-CEO at the Ceiling</h3><p>You built it to where it is. You can feel that the next stage needs a different operator than the one who got you here. FORGE gives you the system without making you stop being yourself.</p></div>
-      <div class="who-card"><div class="n">02</div><h3>The Division or Business-Unit Leader</h3><p>You run a P&L inside a larger company and carry a number to the parent. FORGE installs the cadence and the one-page strategy that makes your unit the one that delivers.</p></div>
-      <div class="who-card"><div class="n">03</div><h3>The Newly-Seated or Growth-Stage CEO</h3><p>Public or private, you're scaling toward $20M and want to install the operating discipline now — before the complexity outruns you.</p></div>
-      <div class="who-card"><div class="n">04</div><h3>The Turnaround or Inflection Operator</h3><p>Stalled, stressed, or staring down a transition. You don't have time for a 12-month consulting engagement. FORGE gives you the diagnostic, the focus, and the cadence in one quarter.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ OUTCOMES ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">What you walk out with</span>
-      <h2>Real Deliverables. The Actual Plan to Take This Business to Your Goals.</h2>
-      <p class="lead" style="margin-top:14px">FORGE doesn't just make you a better leader. You build five real deliverables — start to finish — that together become your complete operating plan: how this business gets where you want it to go, and who does what to get it there.</p>
-    </div>
-    <div class="out-grid">
-      <div class="out"><div class="num">01 · FOCUS</div><p>One breakthrough goal — owner-signed, team-believed.</p></div>
-      <div class="out"><div class="num">02 · OBJECTIVE</div><p>A team-owned strategy on a page, with 3–5 critical initiatives.</p></div>
-      <div class="out"><div class="num">03 · ROADMAP</div><p>The Rule of Three installed in your org chart — Visionary, Prophet, Operators.</p></div>
-      <div class="out"><div class="num">04 · GOVERN</div><p>An organization that funds the vital few and starves the trivial many.</p></div>
-      <div class="out"><div class="num">05 · EXECUTE</div><p>A live operating cadence your Prophet runs — not you.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ 12-WEEK STRUCTURE ============ -->
-<section class="section r3">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">The 12-week guided path</span>
-      <h2>Twelve Weeks. One Discipline at a Time. A Capstone for Each.</h2>
-      <p class="lead" style="margin-top:14px">Self-paced and non-linear — you start where your bottleneck is. The Bottleneck Diagnostic in Week 1 tells you which discipline to attack first.</p>
-    </div>
-    <div class="weeks">
-      <div class="wk"><div class="tag">Weeks 1–2</div><h4>Focus</h4><p>Install the 80/20 mindset and run the Bottleneck Diagnostic.</p><div class="cap"><b>Capstone:</b> Bottleneck Diagnostic</div></div>
-      <div class="wk"><div class="tag">Weeks 3–5</div><h4>Objective</h4><p>Own the number. Align owner and team on one goal.</p><div class="cap"><b>Capstone:</b> The One Goal</div></div>
-      <div class="wk"><div class="tag">Weeks 6–8</div><h4>Roadmap</h4><p>Translate the goal into a one-page, team-owned strategy.</p><div class="cap"><b>Capstone:</b> Strategy on a Page</div></div>
-      <div class="wk"><div class="tag">Weeks 9–10</div><h4>Govern</h4><p>Install the Rule of Three. Right people, right seats, right capital.</p><div class="cap"><b>Capstone:</b> The Org &amp; X-Matrix</div></div>
-      <div class="wk"><div class="tag">Weeks 11–12</div><h4>Execute</h4><p>Run your first MBR and lock the cadence in place.</p><div class="cap"><b>Capstone:</b> First MBR &amp; Cadence</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ RULE OF THREE ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">The architecture</span>
-      <h2>You've Been Playing the Operator. There Are Actually Three Roles.</h2>
-      <p class="lead" style="margin-top:14px">Right now you're probably doing all of it — and the business reflects it. FORGE shows you all three roles, where you stand today, and the path to playing just one: the Visionary. Until you've hired into the other two seats, we show you how to play the Prophet and the Operator <i>better</i> — and how to keep carrying them — while you build your team and add those roles as the company grows.</p>
-    </div>
-    <div class="r3-grid">
-      <div class="r3-card"><div class="role">The Visionary</div><div class="hz">Where you're headed</div><p>Sets direction. Decides what the business is for — and what it refuses to do. This is the seat we're getting you to.</p></div>
-      <div class="r3-card"><div class="role">The Prophet</div><div class="hz">6–18 months out</div><p>Reads the market, the team, and the data. Sees around corners and runs the operating cadence so you don't have to.</p></div>
-      <div class="r3-card"><div class="role">The Operator</div><div class="hz">This week</div><p>Holds the line on metrics, meetings, and accountability. The seat you've been stuck in — and the one you hand off first.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ BILL ============ -->
-<section class="section bill r3">
-  <div class="wrap row">
-    <img src="https://the8020institute.com/wp-content/uploads/2025/12/Canady_Bill_cropped_Cream_Jacket_Still1.png" alt="Bill Canady, Founder & CEO of The 80/20 Institute" />
-    <div>
-      <span class="eyebrow">Built by an operator, not a guru</span>
-      <h2 style="color:var(--navy);font-size:clamp(1.8rem,3.6vw,2.5rem);margin-top:12px">This Isn't Theory. It's a Proven System.</h2>
-      <p class="lead" style="margin-top:14px">FORGE is the Profitable Growth Operating System™ Bill Canady built and ran as a three-time CEO. It's not a theory about how a business should work — it's what works, proven again and again across companies of every size.</p>
-      <ul>
-        <li>Over <b>$3 billion</b> in shareholder value created across his CEO roles</li>
-        <li>Currently leads a billion-dollar industrial company; serves on multibillion-dollar boards</li>
-        <li>30+ years across manufacturing, distribution, and industrial services</li>
-        <li>PE-backed, public, and family-owned operating experience</li>
-      </ul>
-      <p class="books">The three books behind FORGE: <i>The 80/20 CEO</i> · <i>From Panic to Profit</i> · <i>The Rule of Three</i></p>
-      <div class="founder-note">"I built FORGE because I kept getting the same call — from CEOs carrying the entire business on their own back, exhausted, not sure what to do next. This is the system I wish someone had handed me in my first seat." <b>— Bill Canady</b></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TESTIMONIALS ============ -->
-<section class="section tmoni" id="testimonials">
-  <div class="wrap">
-    <div class="sec-head center" style="margin:0 auto">
-      <span class="eyebrow">Proof from the field</span>
-      <h2>Leaders Who Installed the System — in Their Own Words</h2>
-      <p class="lead" style="margin:14px auto 0">Real CEOs and operators who stopped guessing, simplified, and changed how their business runs.</p>
-    </div>
-    <div class="quote-grid">
-      <div class="qcard"><div class="stars">★★★★★</div><blockquote>"The opportunity is in the simplicity. Create simplicity in the operation, and it leads to extraordinary profits."</blockquote><div class="qwho">Steve DeSanto<span>Operations Manager</span></div></div>
-      <div class="qcard"><div class="stars">★★★★★</div><blockquote>"I want the data to be the loudest voice in our strategy. It lets me focus, gives permission to be different, and uses the data to drive decisions."</blockquote><div class="qwho">Curt Tueffert<span>VP Sales Development, DXP</span></div></div>
-      <div class="qcard"><div class="stars">★★★★★</div><blockquote>"The 80/20 Institute's data-driven framework replaces guesswork — and drives measurable, repeatable growth."</blockquote><div class="qwho">Verified 80/20 Client<span>The 80/20 Institute</span></div></div>
-    </div>
-    <!-- LIVE Senja "Wall of Love" — the same widget running on the8020institute.com.
-         Renders all written + VIDEO testimonials and auto-updates as new ones are added. -->
-    <div class="senja-wrap">
-      <div class="senja-embed" data-id="cbeae6de-8cfd-4cfe-9f83-dc3e8f119198" data-mode="shadow" data-lazyload="false" style="display:block;width:100%;"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ ENROLL STEPS ============ -->
-<section class="section">
-  <div class="wrap center">
-    <div class="sec-head center">
-      <span class="eyebrow">Your choice</span>
-      <h2>Two Ways to Start</h2>
-      <p class="lead" style="margin:14px auto 0">Ready to talk now, or want to be sure first? Both lead to the same place.</p>
-    </div>
-    <div class="steps" style="text-align:left">
-      <div class="step"><div class="s">A</div><h3>Book Your Call</h3><p>Ready to talk? Book a call and learn how FORGE works today — straight from the team, with your questions answered and investment covered on the call.</p></div>
-      <div class="step"><div class="s">B</div><h3>Take the Intake First</h3><p>Five questions, about fifteen minutes. It's a real diagnostic — built to show you exactly where you stand and the depth we work at, not to sell you. Most CEOs learn more about their business here than they expected.</p></div>
-      <div class="step"><div class="s">→</div><h3>Then You Start Building</h3><p>Once you're in, you start inside The 80/20 Institute at FOCUS — building your plan from the first session. You're operating, not just learning.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ APPLY: INTAKE FORM + BOOKING ============ -->
-<section class="section apply" id="apply">
-  <div class="wrap">
-    <div class="sec-head center" style="margin:0 auto">
-      <span class="eyebrow on-navy">Your move</span>
-      <h2 style="color:#fff">Take the Intake, or Book Your Call.</h2>
-      <p class="lead" style="margin:14px auto 0;color:#c4cbdd">Your choice. Book the call if you're ready to talk now — or take the intake first. Five questions, about fifteen minutes, built to show you where you really stand and whether FORGE fits where you are.</p>
-    </div>
-    <div class="grid">
-      <!-- INTAKE CTA -->
-      <div class="panel" style="display:flex;flex-direction:column">
-        <h3>The FORGE Intake</h3>
-        <p class="sub">Five questions, about fifteen minutes. Bill's own diagnostic — built to show you exactly where your business stands and the depth we work at. Not a sales quiz.</p>
-        <ul style="list-style:none;margin:8px 0 22px;display:grid;gap:11px">
-          <li style="padding-left:28px;position:relative;color:#39414f"><span style="position:absolute;left:0;color:var(--gold-deep);font-weight:800">&#10003;</span> Talk or type — answer in your own words.</li>
-          <li style="padding-left:28px;position:relative;color:#39414f"><span style="position:absolute;left:0;color:var(--gold-deep);font-weight:800">&#10003;</span> Get a branded diagnostic you can keep.</li>
-          <li style="padding-left:28px;position:relative;color:#39414f"><span style="position:absolute;left:0;color:var(--gold-deep);font-weight:800">&#10003;</span> We review every one and reach out.</li>
-        </ul>
-        <a class="btn btn-gold" style="width:100%;margin-top:auto" href="/intake.html">Start the Intake &rarr;</a>
-        <p class="form-note" style="margin-top:14px">Free. No obligation. About 15 minutes.</p>
-      </div>
-
-      <!-- (legacy quick form removed — kept hidden block below intentionally empty) -->
-      <template id="legacyFormUnused"><form id="forgeForm" novalidate>
-            <!-- STEP 1 -->
-            <div class="fstep active" data-step="1">
-              <div class="step-head"><strong style="font-family:"proxima-nova","Mulish";color:var(--navy)">About you</strong><span class="count">Step 1 of 3</span></div>
-              <div class="field two">
-                <div><label>First name <span class="req">*</span></label><input name="firstname" required /></div>
-                <div><label>Last name <span class="req">*</span></label><input name="lastname" required /></div>
-              </div>
-              <div class="field"><label>Work email <span class="req">*</span></label><input type="email" name="email" required /></div>
-              <div class="field two">
-                <div><label>Company</label><input name="company" /></div>
-                <div><label>Mobile phone</label><input name="phone" /></div>
-              </div>
-              <div class="field"><label>Your role <span class="req">*</span></label>
-                <select name="forge_role" required>
-                  <option value="">Select…</option>
-                  <option>Founder / Owner-CEO</option>
-                  <option>Hired / Professional CEO</option>
-                  <option>President or Division / Business-Unit Leader</option>
-                  <option>COO / #2 Operator</option>
-                  <option>Other senior leader</option>
-                </select>
-              </div>
-              <div class="form-nav">
-                <span></span>
-                <button type="button" class="btn btn-navy" data-next>Continue</button>
-              </div>
-            </div>
-            <!-- STEP 2 -->
-            <div class="fstep" data-step="2">
-              <div class="step-head"><strong style="font-family:"proxima-nova","Mulish";color:var(--navy)">Your business</strong><span class="count">Step 2 of 3</span></div>
-              <div class="field"><label>Annual revenue <span class="req">*</span></label>
-                <select name="revenue_band" required>
-                  <option value="">Select…</option>
-                  <option>Under $2M</option>
-                  <option>$2M – $5M</option>
-                  <option>$5M – $10M</option>
-                  <option>$10M – $20M</option>
-                  <option>Division / unit of a larger company</option>
-                  <option>Over $20M</option>
-                </select>
-              </div>
-              <div class="field"><label>Which role do you spend MOST of your time in today? <span class="req">*</span></label>
-                <select name="bottleneck_role" required>
-                  <option value="">Select…</option>
-                  <option>Visionary — direction &amp; vision</option>
-                  <option>Prophet — reading the market, running cadence</option>
-                  <option>Operator — in the weekly weeds</option>
-                </select>
-              </div>
-              <div class="field"><label>Do you have ONE owner- or board-signed number for this year? <span class="req">*</span></label>
-                <select name="objective_clarity" required>
-                  <option value="">Select…</option>
-                  <option>Yes — clear and everyone knows it</option>
-                  <option>Sort of — it exists but isn't aligned</option>
-                  <option>No — not really</option>
-                </select>
-              </div>
-              <div class="field"><label>If you stepped away for two weeks, the business would… <span class="req">*</span></label>
-                <select name="team_lock" required>
-                  <option value="">Select…</option>
-                  <option>Run fine without me</option>
-                  <option>Wobble but survive</option>
-                  <option>Stall — too much runs through me</option>
-                </select>
-              </div>
-              <div class="form-nav">
-                <button type="button" class="btn btn-ghost" style="color:var(--navy);border-color:var(--line)" data-prev>Back</button>
-                <button type="button" class="btn btn-navy" data-next>Continue</button>
-              </div>
-            </div>
-            <!-- STEP 3 -->
-            <div class="fstep" data-step="3">
-              <div class="step-head"><strong style="font-family:"proxima-nova","Mulish";color:var(--navy)">Timing &amp; fit</strong><span class="count">Step 3 of 3</span></div>
-              <div class="field"><label>What's driving the timing? <span class="req">*</span></label>
-                <select name="urgency_driver" required>
-                  <option value="">Select…</option>
-                  <option>Hitting a growth ceiling</option>
-                  <option>Turnaround / stalled business</option>
-                  <option>Owner or board pressure on the number</option>
-                  <option>Preparing the business for sale / exit</option>
-                  <option>New seat / integration</option>
-                  <option>Just want the system in place</option>
-                </select>
-              </div>
-              <div class="field"><label>How soon do you want this installed? <span class="req">*</span></label>
-                <select name="timeline" required>
-                  <option value="">Select…</option>
-                  <option>Now — this quarter</option>
-                  <option>Next quarter</option>
-                  <option>Exploring / next 6 months</option>
-                </select>
-              </div>
-              <div class="field"><label>Anything we should know before the call?</label><textarea name="notes" rows="3" placeholder="Optional — what's the one thing you most want to fix?"></textarea></div>
-              <div class="form-nav">
-                <button type="button" class="btn btn-ghost" style="color:var(--navy);border-color:var(--line)" data-prev>Back</button>
-                <button type="submit" class="btn btn-gold" id="submitBtn">Submit &amp; Book My Call</button>
-              </div>
-              <p class="form-note">By submitting, you agree to be contacted about FORGE. We don't sell your data.</p>
-            </div>
-          </form>
-        </div>
-        <!-- SUCCESS -->
-        <div class="success" id="formSuccess">
-          <div class="chk"><svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#001D3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-          <h3 style="color:var(--navy)">You're in. Now grab a time.</h3>
-          <p class="sub">Thanks — your intake is logged. Pick a time on the right that works for you, and we'll be ready for the conversation.</p>
-          <a class="btn btn-navy" href="#bookingPanel">Go to Booking →</a>
-        </div>
-      </div></template>
-
-      <!-- BOOKING -->
-      <div class="booking" id="bookingPanel">
-        <h3>Book Your Fit Call</h3>
-        <p class="sub">A focused conversation to confirm fit and walk you through FORGE. Investment is covered on the call.</p>
-        <!-- Guaranteed-working direct link to the iClosed scheduler. Always visible. -->
-        <a class="btn btn-gold" style="width:100%;margin-bottom:16px" href="https://app.iclosed.io/e/The8020institute/forge" target="_blank" rel="noopener">Pick a Time →</a>
-        <!-- iClosed inline widget. The fallback text inside is shown until iClosed's widget.js
-             replaces it with the live calendar (only loads on a published, iClosed-approved domain). -->
-        <div class="iclosed-widget" data-url="https://app.iclosed.io/e/The8020institute/forge" title="FORGE"
-             style="width:100%;min-height:300px;display:flex;align-items:center;justify-content:center;background:var(--cream-soft);border:1px dashed var(--line);border-radius:12px">
-          <span style="color:var(--muted);font-size:.92rem;text-align:center;max-width:34ch;padding:24px">The live calendar appears here once the page is published. Use <b>Pick a Time</b> above to book now.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section class="section r3" id="faq">
-  <div class="wrap">
-    <div class="sec-head center" style="margin:0 auto">
-      <span class="eyebrow">Questions</span>
-      <h2>Before You Book</h2>
-    </div>
-    <div style="max-width:820px;margin:36px auto 0">
-      <details><summary>How long is FORGE?</summary><div class="ans">FORGE is a 12-week guided path through five disciplines, with one capstone artifact per discipline. It's self-paced inside that window — most operators install the core system in the 12 weeks and run the cadence ongoing.</div></details>
-      <details><summary>Who is FORGE for?</summary><div class="ans">CEOs and owners of public or private companies up to roughly $20M in revenue, and the division or business-unit leaders running a P&L inside a larger company. If you're at the point where the business has to become a real business — real processes, a real team, a real plan — you're who this is built for.</div></details>
-      <details><summary>What does it cost?</summary><div class="ans">We cover investment on your fit call, once we've confirmed FORGE is right for your situation. The intake and the call come first — that's how we make sure it's a fit before anyone talks numbers.</div></details>
-      <details><summary>Where does the program live?</summary><div class="ans">Everything lives inside The 80/20 Institute — your private member portal. Video lessons, every template, your deliverable worksheets, and the community, all in one place.</div></details>
-      <details><summary>Is it self-paced or live?</summary><div class="ans">The core program is self-paced video plus downloadable templates, structured across 12 weeks. You start where your bottleneck is — the Week 1 diagnostic tells you which discipline to attack first.</div></details>
-      <details><summary>What if I've already done EOS or Traction?</summary><div class="ans">Many of our best operators have. FORGE doesn't waste that muscle — it operates at the altitude the middle-market and growth-stage CEO actually needs, with the Rule of Three architecture on top.</div></details>
-      <details><summary>Can I bring my leadership team?</summary><div class="ans">FORGE installs faster with your #2 or core team in the work. Tell us your setup on the fit call and we'll point you to the right configuration.</div></details>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FINAL CTA ============ -->
-<section class="section final">
-  <div class="wrap">
-    <span class="eyebrow on-navy">Earn the right to grow</span>
-    <h2>This Is the Build of Your Career. Don't Wing It.</h2>
-    <p class="lead" style="color:#c4cbdd;margin:18px auto 0">Book the call if you're ready. Take the intake if you want to be sure. Either way, you walk out with the plan to take this business where you've always meant to take it.</p>
-    <div class="ctas">
-      <a class="btn btn-gold btn-lg" href="/intake.html">Start My Intake</a>
-      <a class="btn btn-ghost btn-lg" href="https://app.iclosed.io/e/The8020institute/forge" target="_blank" rel="noopener">Book My Call</a>
-      <a class="btn btn-ghost btn-lg" href="#video">Watch the Overview</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FOOTER ============ -->
-<footer class="site">
-  <div class="wrap">
-    <div class="top">
-      <div>
-        <svg class="logo-svg" viewBox="0 0 645 200" role="img" aria-label="The 80/20 Institute" xmlns="http://www.w3.org/2000/svg">
-          <g fill="#ffffff">
-            <path d="M165.55 152.146L82.7828 200.001L0 152.146V56.4524L82.7828 8.61328V27.9535L16.733 66.1225V142.476L82.7828 180.661L95.6907 173.197V59.3313L121.528 77.9699V158.256L148.817 142.476V66.1225L134.747 56.4369V33.9973L165.55 56.4524V152.146Z"/>
-            <path d="M204.88 94.1134C204.88 88.7134 208.705 84.0634 214.405 81.6634C209.155 79.4884 205.705 75.9634 205.705 70.1135C205.705 60.2885 216.88 56.6885 227.155 56.6885C237.429 56.6885 248.604 60.2885 248.604 70.1135C248.604 75.9634 245.079 79.4884 239.829 81.6634C245.529 84.0634 249.429 88.7134 249.429 94.1134C249.429 104.313 238.254 108.363 227.155 108.363C216.055 108.363 204.88 104.313 204.88 94.1134ZM233.155 72.3634C233.155 70.4135 230.905 68.9885 227.155 68.9885C223.33 68.9885 221.08 70.4135 221.08 72.3634C221.08 74.3134 224.08 75.8884 227.155 76.3384C230.23 75.8884 233.155 74.3134 233.155 72.3634ZM234.055 92.4634C234.055 90.1384 230.305 88.5634 227.155 88.1134C223.93 88.5634 220.255 90.1384 220.255 92.4634C220.255 94.6384 222.88 96.0634 227.155 96.0634C231.28 96.0634 234.055 94.6384 234.055 92.4634Z"/>
-            <path d="M252.121 82.4884C252.121 68.9135 259.396 56.6885 274.321 56.6885C289.246 56.6885 296.521 68.9135 296.521 82.4884C296.521 96.0634 289.246 108.363 274.321 108.363C259.396 108.363 252.121 96.0634 252.121 82.4884ZM281.296 82.4884C281.296 74.0135 279.121 70.0385 274.321 70.0385C269.521 70.0385 267.346 74.0135 267.346 82.4884C267.346 90.9634 269.521 95.0134 274.321 95.0134C279.121 95.0134 281.296 90.9634 281.296 82.4884Z"/>
-            <path d="M307.24 108.963H297.865L315.64 55.9385H325.015L307.24 108.963Z"/>
-            <path d="M368.988 107.463H328.113V95.6884C350.988 79.5634 353.163 77.6884 353.163 73.9384C353.163 71.5384 350.613 70.0385 347.088 70.0385C342.063 70.0385 338.013 71.9885 334.188 75.2134L325.938 65.1635C331.713 59.0135 340.113 56.6885 347.088 56.6885C360.063 56.6885 368.538 63.8885 368.538 73.9384C368.538 80.7634 364.638 86.3884 351.213 94.2634H368.988V107.463Z"/>
-            <path d="M372.384 82.4884C372.384 68.9135 379.659 56.6885 394.584 56.6885C409.509 56.6885 416.784 68.9135 416.784 82.4884C416.784 96.0634 409.509 108.363 394.584 108.363C379.659 108.363 372.384 96.0634 372.384 82.4884ZM401.559 82.4884C401.559 74.0135 399.384 70.0385 394.584 70.0385C389.784 70.0385 387.609 74.0135 387.609 82.4884C387.609 90.9634 389.784 95.0134 394.584 95.0134C399.384 95.0134 401.559 90.9634 401.559 82.4884Z"/>
-            <path d="M222.93 172.113H207.78V122.088H222.93V172.113Z"/>
-            <path d="M286.647 172.113H272.097L253.647 145.263V172.113H238.497V122.088H254.097L271.497 147.288V122.088H286.647V172.113Z"/>
-            <path d="M298.422 165.063L306.297 153.813C310.047 157.413 315.672 160.263 322.422 160.263C325.272 160.263 327.972 159.288 327.972 157.338C327.972 155.388 325.872 154.413 320.922 153.513C312.672 152.013 300.072 150.063 300.072 137.538C300.072 129.063 307.122 121.338 320.847 121.338C329.022 121.338 336.372 123.663 342.072 128.313L333.972 139.038C329.622 135.738 323.997 134.088 320.022 134.088C316.272 134.088 315.447 135.438 315.447 136.713C315.447 138.663 317.472 139.338 322.797 140.238C331.047 141.663 343.272 144.063 343.272 155.613C343.272 166.638 335.097 173.013 321.672 173.013C311.022 173.013 303.747 169.863 298.422 165.063Z"/>
-            <path d="M381.618 172.113H366.468V135.288H353.043V122.088H394.968V135.288H381.618V172.113Z"/>
-            <path d="M422.998 172.113H407.848V122.088H422.998V172.113Z"/>
-            <path d="M464.44 172.113H449.29V135.288H435.865V122.088H477.79V135.288H464.44V172.113Z"/>
-            <path d="M490.67 151.563V122.088H506.045V151.038C506.045 155.838 508.52 159.663 514.745 159.663C520.894 159.663 523.37 155.838 523.37 151.038V122.088H538.744V151.488C538.744 163.938 531.619 173.013 514.745 173.013C497.87 173.013 490.67 163.938 490.67 151.563Z"/>
-            <path d="M580.221 172.113H565.071V135.288H551.646V122.088H593.571V135.288H580.221V172.113Z"/>
-            <path d="M644.4 172.113H606.451V122.088H644.4V134.688H621.6V140.538H643.875V153.138H621.6V159.513H644.4V172.113Z"/>
-            <path d="M218.427 42.8579H210.172V23.9288H202.857V17.1436H225.701V23.9288H218.427V42.8579Z"/>
-            <path d="M254.909 42.8579H246.654V33.0271H236.887V42.8579H228.632V17.1436H236.887V26.2419H246.654V17.1436H254.909V42.8579Z"/>
-            <path d="M280 42.8579H259.322V17.1436H280V23.6204H267.577V26.6275H279.714V33.1042H267.577V36.3812H280V42.8579Z"/>
-          </g>
-          <path d="M121.528 59.3301L95.6904 39.2182V0L121.528 20.1738V59.3301Z" fill="#FFC61B"/>
-        </svg>
-        <p style="max-width:42ch">FORGE is a product of The 80/20 Institute. We help leaders grow profitably by eliminating complexity and focusing relentlessly on what creates value.</p>
-        <p style="margin-top:14px">The 80/20 Institute<br/>11161 East State Rd 70, Unit 110-910<br/>Lakewood Ranch, FL 34202<br/><a href="tel:+19413631773" style="display:inline">+1 (941) 363-1773</a></p>
-      </div>
-      <div>
-        <h5>Program</h5>
-        <a href="#disciplines">The Five Disciplines</a>
-        <a href="#who">Who It's For</a>
-        <a href="#faq">FAQ</a>
-        <a href="#apply">Book Your Fit Call</a>
-      </div>
-      <div>
-        <h5>The 80/20 Institute</h5>
-        <a href="https://the8020institute.com" target="_blank" rel="noopener">Main Site</a>
-        <a href="https://the8020institute.com/books/" target="_blank" rel="noopener">Books by Bill Canady</a>
-        <a href="https://community.the8020institute.com" target="_blank" rel="noopener">Member Community</a>
-        <a href="https://www.linkedin.com/company/the-80-20-institute/" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-    </div>
-    <div class="legal">
-      <span>© 2026 The 80/20 Institute. All rights reserved.</span>
-      <span>
-        <a href="https://the8020institute.com/privacy-policy/" style="display:inline" target="_blank" rel="noopener">Privacy</a> ·
-        <a href="https://the8020institute.com/terms-and-conditions/" style="display:inline" target="_blank" rel="noopener">Terms</a> ·
-        <a href="https://the8020institute.com/refund-policy/" style="display:inline" target="_blank" rel="noopener">Refund</a>
-      </span>
-    </div>
-  </div>
-</footer>
+</div>
 
 <script>
-/* =================================================================
-   FORGE LANDING PAGE — INTEGRATION CONFIG
-   Fill these in, save, and the page wires itself up. Nothing else
-   to touch.
-   ================================================================= */
+/* ============================ CONFIG ============================ */
 const CONFIG = {
-  // 1) iClosed scheduler — paste your iClosed embed/scheduling URL.
-  //    Leave "" to show the placeholder + fallback "Book a Call" button.
-  ICLOSED_EMBED_URL: "https://app.iclosed.io/e/The8020institute/forge",  // FORGE fit-call scheduler
-
-  // 2) HubSpot — from your HubSpot form's "Share / Embed" panel.
-  //    Region is usually "na1". Leave PORTAL/FORM "" to run in demo mode
-  //    (form still validates + advances; data is logged to console only).
-  HUBSPOT_REGION:  "na1",
-  HUBSPOT_PORTAL_ID: "",        // e.g. "1234567"
-  HUBSPOT_FORM_ID:   "",        // e.g. "a1b2c3d4-0000-1111-2222-abcdef123456"
-
-  // 3) Overview video — your Vimeo video ID (numbers only).
-  VIMEO_VIDEO_ID: "1203920461"  // FORGE overview video
+  HUBSPOT_PORTAL_ID: "82724048",   // confirmed 80/20 Institute portal
+  HUBSPOT_FORM_ID:   "",           // <-- paste the "FORGE – Intake" form GUID (Share/Embed panel). Blank = demo mode (logs to console).
+  HUBSPOT_REGION:    "na1",
+  ICLOSED_URL:       "https://app.iclosed.io/e/The8020institute/forge"
 };
 
-/* ---------- Video ---------- */
-(function(){
-  if(CONFIG.VIMEO_VIDEO_ID){
-    const f=document.getElementById('videoFrame');
-    const ph=document.getElementById('videoPlaceholder');
-    if(ph) ph.remove();
-    const ifr=document.createElement('iframe');
-    ifr.src="https://player.vimeo.com/video/"+CONFIG.VIMEO_VIDEO_ID+"?title=0&byline=0&portrait=0";
-    ifr.allow="autoplay; fullscreen; picture-in-picture";
-    ifr.setAttribute('allowfullscreen','');
-    f.appendChild(ifr);
-  }
-})();
+/* ===================== DIAGNOSTIC CONTENT ====================== */
+const QUESTIONS = [
+  { key:"number", kicker:"01 · The Number",
+    text:"What's the number you're driving this business to — the revenue or profit target — and by when?",
+    hint:"Who set it: you, an owner, or a board? And is it written down where your team can see it?",
+    options:[
+      {v:"a", label:"Clear and shared — one number, a date, and the team knows it."},
+      {v:"b", label:"It exists, but it's mostly in my head or not really aligned."},
+      {v:"c", label:"Honestly, there's no one clear number yet."}
+    ],
+    insight:{
+      a:"Strong. Most CEOs your size can't name one number their team could repeat back. You already have the foundation FORGE executes against — now it's about making every lever serve it.",
+      b:"This is the most common gap we see. A number that lives in your head isn't an operating target — it's a hope. FORGE's first move turns it into one goal your whole team can recite and own.",
+      c:"That's the honest answer, and it's the right place to start. You can't earn the right to grow against a target you've never named. Week one of FORGE puts a real number on the wall."
+    }},
+  { key:"focus", kicker:"02 · Where Growth Comes From",
+    text:"Of everything you do — your customers, products, services — which slice actually drives the profit?",
+    hint:"Name it. And honestly, how much of your time, people, and cash goes to the part that doesn't?",
+    options:[
+      {v:"a", label:"I know my vital few cold, and we resource them first."},
+      {v:"b", label:"I have a sense, but we treat too much as equal."},
+      {v:"c", label:"We chase most of it equally — I'm not really sure where the profit is."}
+    ],
+    insight:{
+      a:"Rare and powerful — you already think in 80/20. FORGE sharpens it into a system your team runs without you, so the vital few stay protected even when you're not in the room.",
+      b:"This is where margin hides. When everything gets equal attention, your best customers quietly subsidize your worst. FORGE makes the cut explicit: fund the vital few, starve the rest.",
+      c:"This is the single biggest lever in your business, and right now it's untouched. The 80/20 work in FORGE is built for exactly this — it's usually where the first real profit shows up."
+    }},
+  { key:"team", kicker:"03 · The Team",
+    text:"Your key people — for each, did you hire them or inherit them? And are they the team to scale this, or a question mark?",
+    hint:"Use names. Be honest — this one matters most when it's uncomfortable.",
+    options:[
+      {v:"a", label:"Strong team, right seats — I'd run through a wall for them."},
+      {v:"b", label:"Good people, but there's a question mark I've been avoiding."},
+      {v:"c", label:"Truth is, I'm carrying most of it myself."}
+    ],
+    insight:{
+      a:"That's a real asset — most CEOs your size are still carrying the business alone. FORGE shows you how to hand them the Prophet and Operator roles so you can finally move up to Visionary.",
+      b:"You already know the answer — you just named it. The question mark you've been avoiding is usually the thing capping the business. FORGE gives you the structure to face it without blowing up the team.",
+      c:"Then the business is a job, not yet a company — and you can't scale a job. FORGE helps you build the bench and the roles around you, so the business stops depending on you for everything."
+    }},
+  { key:"bottleneck", kicker:"04 · The Bottleneck",
+    text:"Where do decisions get stuck? Be honest — where are YOU the limiting factor?",
+    hint:"And if you stepped away for two full weeks, what breaks first?",
+    options:[
+      {v:"a", label:"It runs fine without me — I'm working on the business, not in it."},
+      {v:"b", label:"It wobbles — too much still routes through me."},
+      {v:"c", label:"It would stall — I'm in everything."}
+    ],
+    insight:{
+      a:"You're already playing closer to the Visionary seat than most. FORGE's value for you is depth — tightening the system so 'runs fine' becomes 'compounds' while you're gone.",
+      b:"Classic. You've built something real, but you're still the Operator. FORGE maps exactly which decisions to push down a level, and how — so the business stops waiting on you.",
+      c:"That's the most important thing you'll learn here, and it's fixable. Being in everything is why you're exhausted. FORGE installs the Rule of Three so the right work happens at the right level — not all on your desk."
+    }},
+  { key:"want", kicker:"05 · What You Want",
+    text:"Twelve weeks from now you walk out of FORGE with a real operating plan — one goal, a strategy on a page, the right roles, and a cadence that runs without you. What would make those twelve weeks worth it?",
+    hint:"Be specific. What has to be true about that plan — and what it changes for you?",
+    options:[
+      {v:"a", label:"A business that runs without me — freedom to lead, not firefight."},
+      {v:"b", label:"Confidence we're focused on the right things, with a clear plan."},
+      {v:"c", label:"Getting it ready to scale, sell, or hand off."}
+    ],
+    insight:{
+      a:"That's exactly what the system is built to produce. The plan you build in FORGE is the path from firefighter to Visionary — on paper, with owners and dates.",
+      b:"You'll have it in writing — one goal, the vital few, and who owns what. FORGE turns 'I think we're focused' into a one-page plan your team actually executes.",
+      c:"Then this is the build that matters. Buyers, successors, and boards pay for a business that runs on a system, not on you — and that's precisely what you walk out with."
+    }}
+];
 
-/* iClosed inline scheduler: only load the widget on the live site, so local/preview
-   views show the clean fallback note instead of a broken embed. The "Pick a Time"
-   button works everywhere regardless. Edit PROD_HOSTS if your domain changes. */
-(function(){
-  const PROD_HOSTS = /(the8020institute\.com)$/i;
-  if(PROD_HOSTS.test(location.hostname)){
-    const s=document.createElement('script');
-    s.src="https://app.iclosed.io/assets/widget.js"; s.async=true; s.type="text/javascript";
-    document.body.appendChild(s);
-  }
-})();
+const OVERALL = {
+  high:{ title:"You're further along than most — this is about leverage.",
+    body:"You've already got real pieces in place. For you, FORGE is about depth and leverage: turning a good business into one that compounds and could command a premium. The fit is strong — the conversation with Bill is mostly about pace and where to push first." },
+  mid:{ title:"You've built something real — and you can feel the ceiling.",
+    body:"You've got a genuine business, and you can feel where it's capped. The gaps you named are exactly what FORGE installs — the number, the focus, the team, the cadence. This is the right system at the right moment. The next step is a straight conversation with Bill about your starting point." },
+  low:{ title:"You're at the most important inflection: turning a job into a business.",
+    body:"Nothing here is a knock — it's where most great companies sit right before they install a system. You're carrying a lot, and the business still runs on you. FORGE was built for exactly this moment. Start with the call, and Bill will tell you straight whether now is the time." }
+};
 
-/* The on-page quick form was replaced by the dedicated FORGE Intake at /intake. */
+/* ======================== STATE / FLOW ======================== */
+let cur = 0;
+const answers = QUESTIONS.map(()=>({text:"", choice:""}));
+const contact = {};
+
+function show(id){ document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+function start(){ cur=0; show('qScene'); renderQ(); }
+
+function renderQ(){
+  const q = QUESTIONS[cur];
+  document.getElementById('bar').style.width = ((cur)/QUESTIONS.length*100)+'%';
+  document.getElementById('qcount').textContent = `Question ${cur+1} of ${QUESTIONS.length}`;
+  document.getElementById('qkicker').textContent = q.kicker;
+  document.getElementById('qtext').textContent = q.text;
+  document.getElementById('qhint').textContent = q.hint;
+  document.getElementById('qanswer').value = answers[cur].text;
+  document.getElementById('qerr').style.display='none';
+  const opts = document.getElementById('qopts'); opts.innerHTML='';
+  q.options.forEach(o=>{
+    const sel = answers[cur].choice===o.v ? ' sel':'';
+    const id = 'o_'+o.v;
+    opts.insertAdjacentHTML('beforeend',
+      `<label class="opt${sel}" id="lab_${o.v}"><input type="radio" name="truth" value="${o.v}" ${answers[cur].choice===o.v?'checked':''}/><span>${o.label}</span></label>`);
+  });
+  opts.querySelectorAll('input[name=truth]').forEach(r=>r.addEventListener('change',e=>{
+    answers[cur].choice = e.target.value;
+    opts.querySelectorAll('.opt').forEach(l=>l.classList.remove('sel'));
+    document.getElementById('lab_'+e.target.value).classList.add('sel');
+    document.getElementById('qerr').style.display='none';
+  }));
+  document.getElementById('backBtn').style.visibility = cur===0 ? 'hidden':'visible';
+  document.getElementById('nextBtn').textContent = cur===QUESTIONS.length-1 ? 'Last step →' : 'Continue →';
+}
+function saveCur(){ answers[cur].text = document.getElementById('qanswer').value.trim(); }
+function back(){ saveCur(); if(cur>0){cur--; renderQ();} else show('welcomeScene'); }
+function next(){
+  saveCur();
+  if(!answers[cur].choice){ document.getElementById('qerr').style.display='block'; return; }
+  if(cur < QUESTIONS.length-1){ cur++; renderQ(); }
+  else { show('contactScene'); }
+}
+
+/* ======================== FINISH ======================== */
+function scoreBand(){
+  const map={a:2,b:1,c:0};
+  const s = answers.reduce((t,a)=>t+(map[a.choice]??0),0); // 0..10
+  return s>=8 ? 'high' : s>=4 ? 'mid' : 'low';
+}
+function validEmail(x){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(x); }
+
+function finish(){
+  const f=val('firstname'), l=val('lastname'), e=val('email');
+  let ok=true;
+  toggleErr('e_first', !f); toggleErr('e_last', !l); toggleErr('e_email', !validEmail(e));
+  if(!f||!l||!validEmail(e)) return;
+  contact.firstname=f; contact.lastname=l; contact.email=e;
+  contact.company=val('company'); contact.phone=val('phone');
+  buildDoc();
+  show('resultsScene');
+  document.getElementById('bookBtn').href = CONFIG.ICLOSED_URL;
+  document.getElementById('bookBtn2').href = CONFIG.ICLOSED_URL;
+  submitToHubSpot();
+}
+function val(id){ return document.getElementById(id).value.trim(); }
+function toggleErr(id,on){ document.getElementById(id).style.display = on?'block':'none'; }
+
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function buildDoc(){
+  const band = scoreBand();
+  const today = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const name = `${contact.firstname} ${contact.lastname}`;
+  let dims='';
+  QUESTIONS.forEach((q,i)=>{
+    const a=answers[i];
+    const said = a.text ? `<div class="ans"><span class="ansk">In your words</span>${esc(a.text)}</div>` : '';
+    dims += `<div class="dim">
+      <div class="dk">${q.kicker}</div>
+      <h3>${esc(q.text)}</h3>
+      ${said}
+      <div class="ins"><span class="insk">What this tells us</span>${q.insight[a.choice]||''}</div>
+    </div>`;
+  });
+  const read = OVERALL[band];
+  const doc = `
+  <div class="doc-hero">
+    <svg class="logo" viewBox="0 0 166 200" xmlns="http://www.w3.org/2000/svg" aria-label="The 80/20 Institute">
+      <path fill="#ffffff" d="M165.55 152.146L82.7828 200.001L0 152.146V56.4524L82.7828 8.61328V27.9535L16.733 66.1225V142.476L82.7828 180.661L95.6907 173.197V59.3313L121.528 77.9699V158.256L148.817 142.476V66.1225L134.747 56.4369V33.9973L165.55 56.4524V152.146Z"/>
+      <path d="M121.528 59.3301L95.6904 39.2182V0L121.528 20.1738V59.3301Z" fill="#FFC61B"/>
+    </svg>
+    <span class="eyebrow">Your FORGE Diagnostic</span>
+    <h1>Where Your Business Stands</h1>
+    <div class="who">${esc(name)}${contact.company?` · ${esc(contact.company)}`:''} · ${today}</div>
+  </div>
+  <div class="doc-body">
+    <p class="doc-intro">You just answered the five questions Bill Canady asks first. Below is what you said, and what each answer tells us about where your business is right now — and where FORGE would start. This is the same diagnostic lens used inside the program. Read it straight; the questions are the work.</p>
+    ${dims}
+    <div class="readbox">
+      <span class="eyebrow">The overall read</span>
+      <h3>${read.title}</h3>
+      <p>${read.body}</p>
+    </div>
+    <div class="nextbox">
+      <h3>What happens next</h3>
+      <ul>
+        <li><b>Book time with Bill</b> using the button on this page — he'll walk your results with you.</li>
+        <li><b>Bill reviews every intake personally</b> and will also reach out to you directly.</li>
+        <li>Keep this document. It's your honest starting line — and the first artifact of the work.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="doc-foot">FORGE — The 80/20 CEO Operating System · The 80/20 Institute · Built by Bill Canady · forge.the8020institute.com</div>`;
+  document.getElementById('doc').innerHTML = doc;
+}
+
+/* ======================== PDF ======================== */
+function downloadPDF(){
+  const el = document.getElementById('doc');
+  const name = `${contact.firstname||'FORGE'}_${contact.lastname||'Diagnostic'}`.replace(/[^a-z0-9_]/gi,'');
+  if(window.html2pdf){
+    html2pdf().set({
+      margin:0, filename:`FORGE_Diagnostic_${name}.pdf`,
+      image:{type:'jpeg',quality:0.96},
+      html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},
+      jsPDF:{unit:'pt',format:'a4',orientation:'portrait'},
+      pagebreak:{mode:['css','legacy']}
+    }).from(el).save();
+  } else { window.print(); }
+}
+
+/* ======================== HUBSPOT ======================== */
+function submitToHubSpot(){
+  const status = document.getElementById('saveStatus');
+  const band = scoreBand();
+  const transcript = QUESTIONS.map((q,i)=>
+    `${q.kicker}\nQ: ${q.text}\nClosest: ${q.options.find(o=>o.v===answers[i].choice)?.label||'—'}\nIn their words: ${answers[i].text||'(left blank)'}\nRead: ${q.insight[answers[i].choice]||''}`
+  ).join('\n\n');
+  const message = `FORGE INTAKE — ${contact.firstname} ${contact.lastname} (${contact.company||'—'})\nOverall read: ${band.toUpperCase()} — ${OVERALL[band].title}\n\n${transcript}`;
+
+  if(!CONFIG.HUBSPOT_FORM_ID){
+    console.log('[FORGE intake — demo mode] contact:',contact,'\n',message);
+    status.textContent = 'Demo mode — results not yet sent (add the HubSpot form ID in CONFIG to enable).';
+    return;
+  }
+  const fields = [
+    {name:'firstname',value:contact.firstname},
+    {name:'lastname',value:contact.lastname},
+    {name:'email',value:contact.email},
+    {name:'company',value:contact.company},
+    {name:'phone',value:contact.phone},
+    {name:'message',value:message}
+  ].filter(f=>f.value);
+  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${CONFIG.HUBSPOT_PORTAL_ID}/${CONFIG.HUBSPOT_FORM_ID}`,{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({fields,context:{pageUri:location.href,pageName:'FORGE Intake'}})
+  }).then(r=>{
+    status.textContent = r.ok ? 'Your results are saved and on their way to Bill.' : 'Saved locally — if you don’t hear back in 2 business days, email bill@the8020institute.com.';
+    if(r.ok) status.classList.add('ok');
+  }).catch(()=>{ status.textContent='Saved locally — email bill@the8020institute.com if you don’t hear back.'; });
+}
 </script>
-
-<!-- iClosed widget.js is loaded conditionally (production hostnames only) by the script above. -->
-
-<!-- Senja Wall of Love — loads the live 80/20 Institute testimonial wall (written + video). -->
-<script async type="text/javascript" src="https://widget.senja.io/widget/cbeae6de-8cfd-4cfe-9f83-dc3e8f119198/platform.js"></script>
 </body>
 </html>

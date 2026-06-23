@@ -108,6 +108,12 @@
   .readbox .eyebrow{color:var(--gold)}
   .readbox h3{color:#fff;font-size:1.3rem;margin:8px 0 10px}
   .readbox p{color:#dfe5ef}
+  .standout{border:1.5px solid var(--gold);background:#fffdf4;border-radius:14px;padding:22px 26px;margin:24px 0}
+  .standout .eyebrow{color:var(--gold-deep)}
+  .standout h3{color:var(--navy);font-size:1.25rem;margin:6px 0 4px}
+  .standout .item{margin-top:15px}
+  .standout .item b{display:block;color:var(--navy);font-size:1.04rem;margin-bottom:3px}
+  .standout .item p{color:var(--graphite)}
   .nextbox{padding:22px 0 30px}
   .nextbox h3{color:var(--navy);font-size:1.2rem;margin-bottom:8px}
   .nextbox ul{margin:12px 0 0 18px;color:var(--graphite)}
@@ -199,6 +205,10 @@
     <div class="qtext" id="qtext"></div>
     <div class="qhint" id="qhint"></div>
     <textarea id="qanswer" placeholder="In your own words… (speak or type)"></textarea>
+    <div id="qanchorWrap" style="display:none;margin-top:14px">
+      <label id="qanchorLabel" style="display:block;font-weight:700;font-size:.92rem;color:var(--navy);margin-bottom:6px"></label>
+      <input id="qanchor" style="width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:1rem;color:var(--ink)" />
+    </div>
     <div class="truth">
       <div class="lbl">Which is closest to the truth?</div>
       <div id="qopts"></div>
@@ -265,6 +275,7 @@ const QUESTIONS = [
   { key:"number", kicker:"01 · The Number",
     text:"What's the number you're driving this business to — the revenue or profit target — and by when?",
     hint:"Who set it: you, an owner, or a board? And is it written down where your team can see it?",
+    anchor:{label:"Name it — this year's target number and the date.", ph:"e.g. $12M revenue by Dec 2026"},
     options:[
       {v:"a", label:"Clear and shared — one number, a date, and the team knows it."},
       {v:"b", label:"It exists, but it's mostly in my head or not really aligned."},
@@ -278,6 +289,7 @@ const QUESTIONS = [
   { key:"focus", kicker:"02 · Where Growth Comes From",
     text:"Of everything you do — your customers, products, services — which slice actually drives the profit?",
     hint:"Name it. And honestly, how much of your time, people, and cash goes to the part that doesn't?",
+    anchor:{label:"Roughly, what % of revenue comes from your top ~20% of customers or products?", ph:"e.g. about 70%"},
     options:[
       {v:"a", label:"I know my vital few cold, and we resource them first."},
       {v:"b", label:"I have a sense, but we treat too much as equal."},
@@ -340,7 +352,7 @@ const OVERALL = {
 
 /* ======================== STATE / FLOW ======================== */
 let cur = 0;
-const answers = QUESTIONS.map(()=>({text:"", choice:""}));
+const answers = QUESTIONS.map(()=>({text:"", choice:"", anchor:""}));
 const contact = {};
 
 function show(id){ document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
@@ -354,6 +366,10 @@ function renderQ(){
   document.getElementById('qtext').textContent = q.text;
   document.getElementById('qhint').textContent = q.hint;
   document.getElementById('qanswer').value = answers[cur].text;
+  const aw=document.getElementById('qanchorWrap');
+  if(q.anchor){ aw.style.display='block'; document.getElementById('qanchorLabel').textContent=q.anchor.label;
+    const ai=document.getElementById('qanchor'); ai.placeholder=q.anchor.ph||''; ai.value=answers[cur].anchor||''; }
+  else { aw.style.display='none'; }
   document.getElementById('qerr').style.display='none';
   const opts = document.getElementById('qopts'); opts.innerHTML='';
   q.options.forEach(o=>{
@@ -371,7 +387,8 @@ function renderQ(){
   document.getElementById('backBtn').style.visibility = cur===0 ? 'hidden':'visible';
   document.getElementById('nextBtn').textContent = cur===QUESTIONS.length-1 ? 'Last step →' : 'Continue →';
 }
-function saveCur(){ answers[cur].text = document.getElementById('qanswer').value.trim(); }
+function saveCur(){ answers[cur].text = document.getElementById('qanswer').value.trim();
+  if(QUESTIONS[cur].anchor){ answers[cur].anchor = (document.getElementById('qanchor').value||'').trim(); } }
 function back(){ saveCur(); if(cur>0){cur--; renderQ();} else show('welcomeScene'); }
 function next(){
   saveCur();
@@ -385,6 +402,25 @@ function scoreBand(){
   const map={a:2,b:1,c:0};
   const s = answers.reduce((t,a)=>t+(map[a.choice]??0),0); // 0..10
   return s>=8 ? 'high' : s>=4 ? 'mid' : 'low';
+}
+/* Cross-reference the five answers and surface the gaps between what they
+   feel and what they admitted. This is what turns self-assessment into insight. */
+function findContradictions(){
+  const c = answers.map(a=>a.choice); // [number, focus, team, bottleneck, want]
+  const out=[];
+  if(c[2]==='a' && c[3]==='c') out.push({t:"Strong team — yet it stalls without you.",
+    b:"You rated your team as the right people in the right seats, but you also said the business would stall if you stepped away for two weeks. Both can't be fully true. That gap — a good team that still can't run without you — is usually the real constraint, and it's the first thing FORGE pressure-tests."});
+  if(c[0]==='a' && (c[1]==='b'||c[1]==='c')) out.push({t:"Right number — wrong focus.",
+    b:"You've got one clear number everyone knows, but your time and money are spread evenly instead of aimed at the few things that actually hit it. The target's right; the focus isn't there yet. That's the highest-leverage fix in front of you."});
+  if(c[1]==='a' && c[0]==='c') out.push({t:"You can see the profit — but nothing's aimed at it.",
+    b:"You know exactly where your profit comes from, but there's no single number the business is driving toward. Focus without a target is energy without direction. FORGE points your clarity at one goal."});
+  if(c[3]==='a' && c[2]==='c') out.push({t:"It 'runs without you' — but you're carrying the team.",
+    b:"You said it runs fine without you, yet also that you're carrying most of the team yourself. One of those is probably optimism — worth getting honest about which, because it changes where you start."});
+  if(c[4]==='a' && c[3]==='c') out.push({t:"What you want is the opposite of where you are.",
+    b:"You want a business that runs without you — and today you're in everything. That's not a knock; it's the whole point of the work. It just means the path starts at the bottleneck, not a strategy deck."});
+  if(c[0]==='a' && c[3]==='c') out.push({t:"A clear number — that still runs through you.",
+    b:"Everyone knows the number, but hitting it still depends on you being in the room. A goal the team can recite but can't execute without you isn't an operating system yet. That's the install."});
+  return out;
 }
 function validEmail(x){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(x); }
 
@@ -413,7 +449,10 @@ function buildDoc(){
   let dims='';
   QUESTIONS.forEach((q,i)=>{
     const a=answers[i];
-    const said = a.text ? `<div class="ans"><span class="ansk">In your words</span>${esc(a.text)}</div>` : '';
+    let saidInner='';
+    if(a.text) saidInner += `<span class="ansk">In your words</span>${esc(a.text)}`;
+    if(a.anchor) saidInner += `${a.text?'<br><br>':''}<span class="ansk">The figure you named</span>${esc(a.anchor)}`;
+    const said = saidInner ? `<div class="ans">${saidInner}</div>` : '';
     dims += `<div class="dim">
       <div class="dk">${q.kicker}</div>
       <h3>${esc(q.text)}</h3>
@@ -422,6 +461,11 @@ function buildDoc(){
     </div>`;
   });
   const read = OVERALL[band];
+  const cons = findContradictions();
+  const standoutHtml = cons.length
+    ? `<div class="standout"><span class="eyebrow">What stands out</span><h3>The gaps between your answers</h3>`
+      + cons.slice(0,2).map(x=>`<div class="item"><b>${x.t}</b><p>${x.b}</p></div>`).join('') + `</div>`
+    : '';
   const doc = `
   <div class="doc-hero">
     <svg class="logo" viewBox="0 0 166 200" xmlns="http://www.w3.org/2000/svg" aria-label="The 80/20 Institute">
@@ -435,6 +479,7 @@ function buildDoc(){
   <div class="doc-body">
     <p class="doc-intro">You just answered the five questions Bill Canady asks first. Below is what you said, and what each answer tells us about where your business is right now — and where FORGE would start. This is the same diagnostic lens used inside the program. Read it straight; the questions are the work.</p>
     ${dims}
+    ${standoutHtml}
     <div class="readbox">
       <span class="eyebrow">The overall read</span>
       <h3>${read.title}</h3>
@@ -467,10 +512,15 @@ function downloadPDF(){
 function submitToHubSpot(){
   const status = document.getElementById('saveStatus');
   const band = scoreBand();
-  const transcript = QUESTIONS.map((q,i)=>
-    `${q.kicker}\nQ: ${q.text}\nClosest: ${q.options.find(o=>o.v===answers[i].choice)?.label||'—'}\nIn their words: ${answers[i].text||'(left blank)'}\nRead: ${q.insight[answers[i].choice]||''}`
-  ).join('\n\n');
-  const message = `FORGE INTAKE — ${contact.firstname} ${contact.lastname} (${contact.company||'—'})\nOverall read: ${band.toUpperCase()} — ${OVERALL[band].title}\n\n${transcript}`;
+  const transcript = QUESTIONS.map((q,i)=>{
+    let blk=`${q.kicker}\nQ: ${q.text}\nClosest: ${q.options.find(o=>o.v===answers[i].choice)?.label||'—'}`;
+    if(answers[i].anchor) blk+=`\nFigure named: ${answers[i].anchor}`;
+    blk+=`\nIn their words: ${answers[i].text||'(left blank)'}\nRead: ${q.insight[answers[i].choice]||''}`;
+    return blk;
+  }).join('\n\n');
+  const cons = findContradictions();
+  const consText = cons.length ? `\n\nGAPS THAT STAND OUT:\n`+cons.map(x=>`• ${x.t}`).join('\n') : '';
+  const message = `FORGE INTAKE — ${contact.firstname} ${contact.lastname} (${contact.company||'—'})\nOverall read: ${band.toUpperCase()} — ${OVERALL[band].title}${consText}\n\n${transcript}`;
 
   if(!CONFIG.HUBSPOT_FORM_ID){
     console.log('[FORGE intake — demo mode] contact:',contact,'\n',message);
@@ -483,15 +533,19 @@ function submitToHubSpot(){
     {name:'email',value:contact.email},
     {name:'company',value:contact.company},
     {name:'phone',value:contact.phone},
-    {name:'message',value:message}
+    {name:'message',value:message},
+    {name:'forge_fit_band',value:band}   // routing: high/mid/low. Needs the forge_fit_band contact property; auto-retries without it if not yet created.
   ].filter(f=>f.value);
-  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${CONFIG.HUBSPOT_PORTAL_ID}/${CONFIG.HUBSPOT_FORM_ID}`,{
-    method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({fields,context:{pageUri:location.href,pageName:'FORGE Intake'}})
-  }).then(r=>{
-    status.textContent = r.ok ? 'Your results are saved and on their way to Bill.' : 'Saved locally — if you don’t hear back in 2 business days, email bill@the8020institute.com.';
-    if(r.ok) status.classList.add('ok');
-  }).catch(()=>{ status.textContent='Saved locally — email bill@the8020institute.com if you don’t hear back.'; });
+  const endpoint=`https://api.hsforms.com/submissions/v3/integration/submit/${CONFIG.HUBSPOT_PORTAL_ID}/${CONFIG.HUBSPOT_FORM_ID}`;
+  const post=fl=>fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:fl,context:{pageUri:location.href,pageName:'FORGE Intake'}})});
+  (async()=>{
+    try{
+      let r=await post(fields);
+      if(!r.ok){ r=await post(fields.filter(f=>f.name!=='forge_fit_band')); } // property may not exist yet — retry clean
+      status.textContent = r.ok ? 'Your results are saved and on their way to Bill.' : 'Saved locally — if you don’t hear back in 2 business days, email bill@the8020institute.com.';
+      if(r.ok) status.classList.add('ok');
+    }catch(e){ status.textContent='Saved locally — email bill@the8020institute.com if you don’t hear back.'; }
+  })();
 }
 </script>
 </body>

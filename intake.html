@@ -17,7 +17,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
   :root{
     --indigo:#001D3D; --navy:#001D3D; --navy-deep:#00152c; --cobalt:#0B4B88;
@@ -116,6 +115,38 @@
   .doc-foot{background:var(--cream-soft);padding:18px 44px;color:var(--muted);font-size:.82rem;text-align:center}
   .saved{font-size:.86rem;color:var(--muted);text-align:center;margin-top:14px}
   .saved.ok{color:#1c7c4a}
+  .pdfhint{font-size:.82rem;color:#c4cbdd;text-align:center;margin-top:-4px}
+
+  /* ===== PRINT → PDF (native, reliable, vector — always readable) =====
+     Uses a light treatment so it prints beautifully even if the browser's
+     "Background graphics" option is off. Navy text + gold accents on white. */
+  @media print{
+    @page{ size:A4; margin:12mm; }
+    *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+    html,body{ background:#fff !important; }
+    .topbar,#welcomeScene,#qScene,#contactScene,
+    #resultsScene .actions,#resultsScene .saved,#resultsScene .pdfhint{ display:none !important; }
+    .wrap{ max-width:none; margin:0; padding:0; }
+    #resultsScene{ display:block !important; }
+    #doc{ box-shadow:none !important; border-radius:0 !important; }
+    .doc-hero{ background:#fff !important; color:var(--navy) !important; border-bottom:4px solid var(--gold);
+      padding:6px 0 18px !important; page-break-after:avoid; }
+    .doc-hero .eyebrow{ color:var(--gold-deep) !important; }
+    .doc-hero h1{ color:var(--navy) !important; }
+    .doc-hero .who{ color:var(--muted) !important; }
+    .doc-hero .logo path[fill="#ffffff"]{ fill:var(--navy) !important; }
+    .doc-body{ padding:22px 0 0 !important; }
+    .doc-intro{ color:var(--graphite) !important; }
+    .dim{ page-break-inside:avoid; }
+    .dim h3{ color:var(--navy) !important; }
+    .dim .ans{ background:#f5f1e8 !important; color:var(--navy) !important; }
+    .readbox{ background:var(--cream-soft) !important; border:1.5px solid var(--gold); color:var(--graphite) !important; page-break-inside:avoid; }
+    .readbox .eyebrow{ color:var(--gold-deep) !important; }
+    .readbox h3{ color:var(--navy) !important; }
+    .readbox p{ color:var(--graphite) !important; }
+    .nextbox{ page-break-inside:avoid; }
+    .doc-foot{ background:#fff !important; border-top:1px solid var(--line); color:var(--muted) !important; padding:14px 0 0 !important; }
+  }
 </style>
 </head>
 <body>
@@ -155,7 +186,7 @@
     <h1 class="title">Five questions. About fifteen minutes. The truth about where your business stands.</h1>
     <p class="lead">This is Bill Canady's diagnostic — the five things he'd ask you first on a live call: your number, where your growth really comes from, your team, where you're the bottleneck, and what you actually want. It runs one question at a time.</p>
     <div class="frame">This isn't a sales quiz. It's built to show you where you truly are — and the depth we work at inside FORGE. Vague answers produce a useless result. Talk like you would to another operator: numbers, names, dates.</div>
-    <p class="lead">At the end you get a branded diagnostic you can keep, you can book time with Bill, and Bill personally reviews every intake and reaches out.</p>
+    <p class="lead">At the end you get a branded diagnostic you can keep, you can book your FORGE call, and we review every intake and reach out.</p>
     <div class="tip"><span>💬</span><span><b>Tip — talk instead of type.</b> Turn on voice-to-text and just speak your answers. Mac: the dictation key or <b>fn fn</b>. iPhone: the <b>mic</b> on the keyboard. Windows: <b>Win + H</b>.</span></div>
     <div class="row"><span></span><button class="btn btn-gold btn-lg" onclick="start()">Begin the Intake →</button></div>
   </section>
@@ -183,7 +214,7 @@
   <section class="scene card" id="contactScene">
     <span class="eyebrow">Last step</span>
     <h1 class="title" style="font-size:1.7rem">Where should we send your diagnostic?</h1>
-    <p class="lead">Your results are ready. Tell us where to send them — and so Bill can reach out personally.</p>
+    <p class="lead">Your results are ready. Tell us where to send them — and so we can reach out.</p>
     <div style="margin-top:20px">
       <div class="two">
         <div class="field"><label>First name *</label><input id="firstname" /><div class="err" id="e_first">Required</div></div>
@@ -205,16 +236,17 @@
   <!-- ===== RESULTS ===== -->
   <section class="scene" id="resultsScene">
     <div class="actions">
-      <button class="btn btn-gold" onclick="downloadPDF()" id="dlBtn">⬇ Download My Diagnostic (PDF)</button>
-      <a class="btn btn-navy" id="bookBtn" href="#" target="_blank" rel="noopener">Book Time With Bill →</a>
+      <button class="btn btn-gold" onclick="downloadPDF()" id="dlBtn">⬇ Save My Diagnostic (PDF)</button>
+      <a class="btn btn-navy" id="bookBtn" href="#" target="_blank" rel="noopener">Book Your FORGE Call →</a>
     </div>
+    <p class="pdfhint">Opens your print window — choose <b>“Save as PDF”</b> as the destination.</p>
     <p class="saved" id="saveStatus">Saving your results…</p>
     <div id="doc"><!-- built by JS --></div>
     <div class="actions" style="margin-top:22px">
-      <button class="btn btn-gold" onclick="downloadPDF()">⬇ Download My Diagnostic (PDF)</button>
-      <a class="btn btn-navy" id="bookBtn2" href="#" target="_blank" rel="noopener">Book Time With Bill →</a>
+      <button class="btn btn-gold" onclick="downloadPDF()">⬇ Save My Diagnostic (PDF)</button>
+      <a class="btn btn-navy" id="bookBtn2" href="#" target="_blank" rel="noopener">Book Your FORGE Call →</a>
     </div>
-    <p class="saved">Bill reviews every intake personally and will also reach out to you directly.</p>
+    <p class="saved">We review every intake and will reach out to you directly.</p>
   </section>
 
 </div>
@@ -299,9 +331,9 @@ const QUESTIONS = [
 
 const OVERALL = {
   high:{ title:"You're further along than most — this is about leverage.",
-    body:"You've already got real pieces in place. For you, FORGE is about depth and leverage: turning a good business into one that compounds and could command a premium. The fit is strong — the conversation with Bill is mostly about pace and where to push first." },
+    body:"You've already got real pieces in place. For you, FORGE is about depth and leverage: turning a good business into one that compounds and could command a premium. The fit is strong — the conversation is mostly about pace and where to push first." },
   mid:{ title:"You've built something real — and you can feel the ceiling.",
-    body:"You've got a genuine business, and you can feel where it's capped. The gaps you named are exactly what FORGE installs — the number, the focus, the team, the cadence. This is the right system at the right moment. The next step is a straight conversation with Bill about your starting point." },
+    body:"You've got a genuine business, and you can feel where it's capped. The gaps you named are exactly what FORGE installs — the number, the focus, the team, the cadence. This is the right system at the right moment. The next step is a straight conversation about your starting point." },
   low:{ title:"You're at the most important inflection: turning a job into a business.",
     body:"Nothing here is a knock — it's where most great companies sit right before they install a system. You're carrying a lot, and the business still runs on you. FORGE was built for exactly this moment. Start with the call, and Bill will tell you straight whether now is the time." }
 };
@@ -411,8 +443,8 @@ function buildDoc(){
     <div class="nextbox">
       <h3>What happens next</h3>
       <ul>
-        <li><b>Book time with Bill</b> using the button on this page — he'll walk your results with you.</li>
-        <li><b>Bill reviews every intake personally</b> and will also reach out to you directly.</li>
+        <li><b>Book your FORGE call</b> using the button on this page — we'll walk your results with you.</li>
+        <li><b>We review every intake</b> and will reach out to you directly.</li>
         <li>Keep this document. It's your honest starting line — and the first artifact of the work.</li>
       </ul>
     </div>
@@ -423,17 +455,12 @@ function buildDoc(){
 
 /* ======================== PDF ======================== */
 function downloadPDF(){
-  const el = document.getElementById('doc');
-  const name = `${contact.firstname||'FORGE'}_${contact.lastname||'Diagnostic'}`.replace(/[^a-z0-9_]/gi,'');
-  if(window.html2pdf){
-    html2pdf().set({
-      margin:0, filename:`FORGE_Diagnostic_${name}.pdf`,
-      image:{type:'jpeg',quality:0.96},
-      html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},
-      jsPDF:{unit:'pt',format:'a4',orientation:'portrait'},
-      pagebreak:{mode:['css','legacy']}
-    }).from(el).save();
-  } else { window.print(); }
+  // Native print-to-PDF: renders real fonts, brand colors, and the logo as crisp vector.
+  const prev = document.title;
+  document.title = `FORGE Diagnostic - ${(contact.firstname||'').trim()} ${(contact.lastname||'').trim()}`.trim();
+  const restore = ()=>{ document.title = prev; window.removeEventListener('afterprint', restore); };
+  window.addEventListener('afterprint', restore);
+  window.print();
 }
 
 /* ======================== HUBSPOT ======================== */

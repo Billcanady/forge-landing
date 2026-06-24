@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Google tag (gtag.js) — Google Ads AW-18034811578 (Forge conversions) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18034811578"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18034811578');
+</script>
 <title>The FORGE Intake · The 80/20 Institute</title>
 <meta name="description" content="The FORGE Intake — a 15-minute, 5-question diagnostic that shows you exactly where your business stands. From The 80/20 Institute." />
 
@@ -711,7 +719,7 @@ function submitToHubSpot(){
       let r=await post(fields);
       if(!r.ok){ r=await post(fields.filter(f=>f.name!=='forge_fit_band')); } // property may not exist yet — retry clean
       status.textContent = r.ok ? 'Your results are saved and on their way to Bill.' : 'Saved locally — if you don’t hear back in 2 business days, email bill@the8020institute.com.';
-      if(r.ok) status.classList.add('ok');
+      if(r.ok){ status.classList.add('ok'); if(typeof gtag==='function'){ gtag('event','conversion',{'send_to':'AW-18034811578/IT5WCOiY2cQcELrF1ZdD','value':100,'currency':'USD'}); } }
     }catch(e){ status.textContent='Saved locally — email bill@the8020institute.com if you don’t hear back.'; }
   })();
 }

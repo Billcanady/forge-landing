@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The FORGE Intake · The 80/20 Institute</title>
-<meta name="description" content="The FORGE Intake — a 15-minute, 5-question diagnostic that shows you exactly where your business stands. Built by Bill Canady." />
+<meta name="description" content="The FORGE Intake — a 15-minute, 5-question diagnostic that shows you exactly where your business stands. From The 80/20 Institute." />
 
 <!-- =================================================================
      THE FORGE INTAKE  ·  forge.the8020institute.com/intake
@@ -108,6 +108,12 @@
   .readbox .eyebrow{color:var(--gold)}
   .readbox h3{color:#fff;font-size:1.3rem;margin:8px 0 10px}
   .readbox p{color:#dfe5ef}
+  .standout{border:1.5px solid var(--gold);background:#fffdf4;border-radius:14px;padding:22px 26px;margin:24px 0}
+  .standout .eyebrow{color:var(--gold-deep)}
+  .standout h3{color:var(--navy);font-size:1.25rem;margin:6px 0 4px}
+  .standout .item{margin-top:15px}
+  .standout .item b{display:block;color:var(--navy);font-size:1.04rem;margin-bottom:3px}
+  .standout .item p{color:var(--graphite)}
   .nextbox{padding:22px 0 30px}
   .nextbox h3{color:var(--navy);font-size:1.2rem;margin-bottom:8px}
   .nextbox ul{margin:12px 0 0 18px;color:var(--graphite)}
@@ -116,6 +122,54 @@
   .saved{font-size:.86rem;color:var(--muted);text-align:center;margin-top:14px}
   .saved.ok{color:#1c7c4a}
   .pdfhint{font-size:.82rem;color:#c4cbdd;text-align:center;margin-top:-4px}
+
+  /* ===== COVER PAGE ===== */
+  .doc-cover{background:var(--hex) repeat,linear-gradient(160deg,var(--indigo),var(--navy-deep));color:#fff;
+    padding:58px 48px 52px;text-align:center;display:flex;flex-direction:column;align-items:center;
+    min-height:560px;justify-content:center;position:relative}
+  .doc-cover svg.biglogo{height:62px;margin-bottom:30px}
+  .doc-cover .cover-eyebrow{font-family:"proxima-nova","Mulish";font-weight:800;letter-spacing:.2em;
+    text-transform:uppercase;font-size:.78rem;color:var(--gold)}
+  .doc-cover .cover-title{font-size:2.6rem;font-weight:900;line-height:1.06;margin:14px 0 6px}
+  .doc-cover .cover-sub{color:#c4cbdd;font-size:1.05rem;max-width:30ch;margin:0 auto 30px}
+  .doc-cover .cover-rule{width:54px;height:3px;background:var(--gold);border-radius:99px;margin:0 auto 28px}
+  .doc-cover .cover-for-k{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+  .doc-cover .cover-for{font-size:1.4rem;font-weight:800;color:#fff;margin:6px 0 2px}
+  .doc-cover .cover-meta{color:#aeb6c9;font-size:.95rem}
+  .doc-cover .cover-tag{margin-top:34px;color:#dfe5ef;font-size:1rem;font-style:italic;max-width:34ch}
+  @media(max-width:560px){.doc-cover{padding:42px 24px;min-height:0}.doc-cover .cover-title{font-size:2rem}}
+
+  /* ===== EXECUTIVE SUMMARY ===== */
+  .exec{padding:34px 0 6px;border-bottom:1px solid var(--line)}
+  .exec .eyebrow{color:var(--gold-deep)}
+  .exec h2{font-size:1.55rem;color:var(--navy);font-weight:900;margin:6px 0 12px}
+  .exec p{color:var(--graphite);font-size:1.02rem;margin-bottom:14px}
+  .exec .headline{background:var(--indigo);color:#fff;border-radius:14px;padding:22px 26px;margin:20px 0 8px}
+  .exec .headline .hk{font-size:.72rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+  .exec .headline .ht{font-size:1.22rem;font-weight:800;color:#fff;margin-bottom:6px}
+  .exec .headline p{color:#dfe5ef;margin:0}
+  .exec .inside{margin:18px 0 6px}
+  .exec .inside .ik{font-weight:800;color:var(--navy);font-size:.82rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;display:block}
+  .exec ol.inside-list{margin:0 0 0 20px;color:var(--graphite)}
+  .exec ol.inside-list li{margin-bottom:6px}
+  .sectionhead{padding:26px 0 2px}
+  .sectionhead .eyebrow{color:var(--gold-deep)}
+  .sectionhead h2{font-size:1.45rem;color:var(--navy);font-weight:900;margin:6px 0 2px}
+  .sectionhead p{color:var(--muted);font-size:.97rem;margin-top:4px}
+
+  /* ===== CLOSING / NEXT MOVE ===== */
+  .closing{background:var(--cream-soft);border:1.5px solid var(--gold);border-radius:16px;padding:28px 30px;margin:28px 0 6px}
+  .closing .eyebrow{color:var(--gold-deep)}
+  .closing h2{font-size:1.45rem;color:var(--navy);font-weight:900;margin:6px 0 10px}
+  .closing .recap{color:var(--graphite);font-size:1.02rem;margin-bottom:18px}
+  .closing ol.steps{margin:0;padding:0;list-style:none;counter-reset:step}
+  .closing ol.steps li{position:relative;padding:0 0 16px 46px;counter-increment:step}
+  .closing ol.steps li:last-child{padding-bottom:0}
+  .closing ol.steps li::before{content:counter(step);position:absolute;left:0;top:-2px;width:32px;height:32px;
+    background:var(--indigo);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:1rem}
+  .closing ol.steps li b{display:block;color:var(--navy);font-size:1.05rem;margin-bottom:2px}
+  .closing ol.steps li span{color:var(--graphite);font-size:.98rem}
 
   /* ===== PRINT → PDF (native, reliable, vector — always readable) =====
      Uses a light treatment so it prints beautifully even if the browser's
@@ -146,6 +200,23 @@
     .readbox p{ color:var(--graphite) !important; }
     .nextbox{ page-break-inside:avoid; }
     .doc-foot{ background:#fff !important; border-top:1px solid var(--line); color:var(--muted) !important; padding:14px 0 0 !important; }
+
+    /* Cover prints as a clean full first page on white */
+    .doc-cover{ background:#fff !important; color:var(--navy) !important; min-height:248mm !important;
+      padding:0 !important; page-break-after:always; border-bottom:none !important; }
+    .doc-cover .biglogo path[fill="#ffffff"]{ fill:var(--navy) !important; }
+    .doc-cover .cover-eyebrow,.doc-cover .cover-for-k{ color:var(--gold-deep) !important; }
+    .doc-cover .cover-title,.doc-cover .cover-for{ color:var(--navy) !important; }
+    .doc-cover .cover-sub,.doc-cover .cover-meta,.doc-cover .cover-tag{ color:var(--graphite) !important; }
+    /* Executive summary + closing on white */
+    .exec,.closing,.sectionhead{ page-break-inside:avoid; }
+    .exec h2,.closing h2,.sectionhead h2{ color:var(--navy) !important; }
+    .exec .headline{ background:var(--cream-soft) !important; border:1.5px solid var(--gold); color:var(--graphite) !important; }
+    .exec .headline .ht{ color:var(--navy) !important; }
+    .exec .headline .hk{ color:var(--gold-deep) !important; }
+    .exec .headline p{ color:var(--graphite) !important; }
+    .closing{ background:var(--cream-soft) !important; }
+    .closing ol.steps li::before{ background:var(--indigo) !important; color:#fff !important; }
   }
 </style>
 </head>
@@ -199,6 +270,10 @@
     <div class="qtext" id="qtext"></div>
     <div class="qhint" id="qhint"></div>
     <textarea id="qanswer" placeholder="In your own words… (speak or type)"></textarea>
+    <div id="qanchorWrap" style="display:none;margin-top:14px">
+      <label id="qanchorLabel" style="display:block;font-weight:700;font-size:.92rem;color:var(--navy);margin-bottom:6px"></label>
+      <input id="qanchor" style="width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:1rem;color:var(--ink)" />
+    </div>
     <div class="truth">
       <div class="lbl">Which is closest to the truth?</div>
       <div id="qopts"></div>
@@ -254,8 +329,8 @@
 <script>
 /* ============================ CONFIG ============================ */
 const CONFIG = {
-  HUBSPOT_PORTAL_ID: "82724048",   // confirmed 80/20 Institute portal
-  HUBSPOT_FORM_ID:   "",           // <-- paste the "FORGE – Intake" form GUID (Share/Embed panel). Blank = demo mode (logs to console).
+  HUBSPOT_PORTAL_ID: "50279359",   // 80/20 Institute Hub ID
+  HUBSPOT_FORM_ID:   "e2c63a51-5a04-4a39-b0d3-6f48e0fa9f4b",  // FORGE - Intake form
   HUBSPOT_REGION:    "na1",
   ICLOSED_URL:       "https://app.iclosed.io/e/The8020institute/forge"
 };
@@ -265,6 +340,7 @@ const QUESTIONS = [
   { key:"number", kicker:"01 · The Number",
     text:"What's the number you're driving this business to — the revenue or profit target — and by when?",
     hint:"Who set it: you, an owner, or a board? And is it written down where your team can see it?",
+    anchor:{label:"Name it — this year's target number and the date.", ph:"e.g. $12M revenue by Dec 2026"},
     options:[
       {v:"a", label:"Clear and shared — one number, a date, and the team knows it."},
       {v:"b", label:"It exists, but it's mostly in my head or not really aligned."},
@@ -278,6 +354,7 @@ const QUESTIONS = [
   { key:"focus", kicker:"02 · Where Growth Comes From",
     text:"Of everything you do — your customers, products, services — which slice actually drives the profit?",
     hint:"Name it. And honestly, how much of your time, people, and cash goes to the part that doesn't?",
+    anchor:{label:"Roughly, what % of revenue comes from your top ~20% of customers or products?", ph:"e.g. about 70%"},
     options:[
       {v:"a", label:"I know my vital few cold, and we resource them first."},
       {v:"b", label:"I have a sense, but we treat too much as equal."},
@@ -340,7 +417,7 @@ const OVERALL = {
 
 /* ======================== STATE / FLOW ======================== */
 let cur = 0;
-const answers = QUESTIONS.map(()=>({text:"", choice:""}));
+const answers = QUESTIONS.map(()=>({text:"", choice:"", anchor:""}));
 const contact = {};
 
 function show(id){ document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
@@ -354,6 +431,10 @@ function renderQ(){
   document.getElementById('qtext').textContent = q.text;
   document.getElementById('qhint').textContent = q.hint;
   document.getElementById('qanswer').value = answers[cur].text;
+  const aw=document.getElementById('qanchorWrap');
+  if(q.anchor){ aw.style.display='block'; document.getElementById('qanchorLabel').textContent=q.anchor.label;
+    const ai=document.getElementById('qanchor'); ai.placeholder=q.anchor.ph||''; ai.value=answers[cur].anchor||''; }
+  else { aw.style.display='none'; }
   document.getElementById('qerr').style.display='none';
   const opts = document.getElementById('qopts'); opts.innerHTML='';
   q.options.forEach(o=>{
@@ -371,7 +452,8 @@ function renderQ(){
   document.getElementById('backBtn').style.visibility = cur===0 ? 'hidden':'visible';
   document.getElementById('nextBtn').textContent = cur===QUESTIONS.length-1 ? 'Last step →' : 'Continue →';
 }
-function saveCur(){ answers[cur].text = document.getElementById('qanswer').value.trim(); }
+function saveCur(){ answers[cur].text = document.getElementById('qanswer').value.trim();
+  if(QUESTIONS[cur].anchor){ answers[cur].anchor = (document.getElementById('qanchor').value||'').trim(); } }
 function back(){ saveCur(); if(cur>0){cur--; renderQ();} else show('welcomeScene'); }
 function next(){
   saveCur();
@@ -385,6 +467,25 @@ function scoreBand(){
   const map={a:2,b:1,c:0};
   const s = answers.reduce((t,a)=>t+(map[a.choice]??0),0); // 0..10
   return s>=8 ? 'high' : s>=4 ? 'mid' : 'low';
+}
+/* Cross-reference the five answers and surface the gaps between what they
+   feel and what they admitted. This is what turns self-assessment into insight. */
+function findContradictions(){
+  const c = answers.map(a=>a.choice); // [number, focus, team, bottleneck, want]
+  const out=[];
+  if(c[2]==='a' && c[3]==='c') out.push({t:"Strong team — yet it stalls without you.",
+    b:"You rated your team as the right people in the right seats, but you also said the business would stall if you stepped away for two weeks. Both can't be fully true. That gap — a good team that still can't run without you — is usually the real constraint, and it's the first thing FORGE pressure-tests."});
+  if(c[0]==='a' && (c[1]==='b'||c[1]==='c')) out.push({t:"Right number — wrong focus.",
+    b:"You've got one clear number everyone knows, but your time and money are spread evenly instead of aimed at the few things that actually hit it. The target's right; the focus isn't there yet. That's the highest-leverage fix in front of you."});
+  if(c[1]==='a' && c[0]==='c') out.push({t:"You can see the profit — but nothing's aimed at it.",
+    b:"You know exactly where your profit comes from, but there's no single number the business is driving toward. Focus without a target is energy without direction. FORGE points your clarity at one goal."});
+  if(c[3]==='a' && c[2]==='c') out.push({t:"It 'runs without you' — but you're carrying the team.",
+    b:"You said it runs fine without you, yet also that you're carrying most of the team yourself. One of those is probably optimism — worth getting honest about which, because it changes where you start."});
+  if(c[4]==='a' && c[3]==='c') out.push({t:"What you want is the opposite of where you are.",
+    b:"You want a business that runs without you — and today you're in everything. That's not a knock; it's the whole point of the work. It just means the path starts at the bottleneck, not a strategy deck."});
+  if(c[0]==='a' && c[3]==='c') out.push({t:"A clear number — that still runs through you.",
+    b:"Everyone knows the number, but hitting it still depends on you being in the room. A goal the team can recite but can't execute without you isn't an operating system yet. That's the install."});
+  return out;
 }
 function validEmail(x){ return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(x); }
 
@@ -413,7 +514,10 @@ function buildDoc(){
   let dims='';
   QUESTIONS.forEach((q,i)=>{
     const a=answers[i];
-    const said = a.text ? `<div class="ans"><span class="ansk">In your words</span>${esc(a.text)}</div>` : '';
+    let saidInner='';
+    if(a.text) saidInner += `<span class="ansk">In your words</span>${esc(a.text)}`;
+    if(a.anchor) saidInner += `${a.text?'<br><br>':''}<span class="ansk">The figure you named</span>${esc(a.anchor)}`;
+    const said = saidInner ? `<div class="ans">${saidInner}</div>` : '';
     dims += `<div class="dim">
       <div class="dk">${q.kicker}</div>
       <h3>${esc(q.text)}</h3>
@@ -422,34 +526,91 @@ function buildDoc(){
     </div>`;
   });
   const read = OVERALL[band];
-  const doc = `
-  <div class="doc-hero">
-    <svg class="logo" viewBox="0 0 166 200" xmlns="http://www.w3.org/2000/svg" aria-label="The 80/20 Institute">
+  const cons = findContradictions();
+  const standoutHtml = cons.length
+    ? `<div class="standout"><span class="eyebrow">What stands out</span><h3>The gaps between your answers</h3>`
+      + cons.slice(0,2).map(x=>`<div class="item"><b>${x.t}</b><p>${x.b}</p></div>`).join('') + `</div>`
+    : '';
+
+  // Logo markup (reused on cover): white main mark + gold accent
+  const LOGO = `<svg class="biglogo" viewBox="0 0 166 200" xmlns="http://www.w3.org/2000/svg" aria-label="The 80/20 Institute">
       <path fill="#ffffff" d="M165.55 152.146L82.7828 200.001L0 152.146V56.4524L82.7828 8.61328V27.9535L16.733 66.1225V142.476L82.7828 180.661L95.6907 173.197V59.3313L121.528 77.9699V158.256L148.817 142.476V66.1225L134.747 56.4369V33.9973L165.55 56.4524V152.146Z"/>
       <path d="M121.528 59.3301L95.6904 39.2182V0L121.528 20.1738V59.3301Z" fill="#FFC61B"/>
-    </svg>
-    <span class="eyebrow">Your FORGE Diagnostic</span>
-    <h1>Where Your Business Stands</h1>
-    <div class="who">${esc(name)}${contact.company?` · ${esc(contact.company)}`:''} · ${today}</div>
+    </svg>`;
+
+  // One-line headline for the executive summary, by fit band
+  const EXEC_HEADLINE = {
+    high: "You've built real foundation. The work now is leverage — making every system serve one number so the business runs without living on you.",
+    mid:  "The pieces are here, but they don't yet pull in one direction. FORGE's job is to connect them into a single operating system you control.",
+    low:  "Right now the business runs on you. FORGE installs the system that takes the weight off — and it starts with focus."
+  };
+  const fitLabel = { high:"Strong foundation", mid:"Building", low:"Foundational" }[band];
+
+  const doc = `
+  <!-- ===== COVER PAGE ===== -->
+  <div class="doc-cover">
+    ${LOGO}
+    <span class="cover-eyebrow">The 80/20 Institute · FORGE</span>
+    <div class="cover-title">Your FORGE Diagnostic</div>
+    <div class="cover-sub">An honest read on where your business stands — and where the work begins.</div>
+    <div class="cover-rule"></div>
+    <div class="cover-for-k">Prepared for</div>
+    <div class="cover-for">${esc(name)}</div>
+    <div class="cover-meta">${contact.company?`${esc(contact.company)} · `:''}${today}</div>
+    <div class="cover-tag">"The questions are the work. Read this straight — it's your starting line."</div>
   </div>
+
   <div class="doc-body">
-    <p class="doc-intro">You just answered the five questions Bill Canady asks first. Below is what you said, and what each answer tells us about where your business is right now — and where FORGE would start. This is the same diagnostic lens used inside the program. Read it straight; the questions are the work.</p>
+
+    <!-- ===== EXECUTIVE SUMMARY (what you're going to get) ===== -->
+    <div class="exec">
+      <span class="eyebrow">Executive summary</span>
+      <h2>What this document gives you</h2>
+      <p>You just answered the five questions we ask every CEO first — your number, where your growth really comes from, your team, where you're the bottleneck, and what you actually want. This document reflects that back: what you said, what each answer signals, where your answers pull against each other, and an overall read on where you stand today.</p>
+      <div class="headline">
+        <span class="hk">The headline · ${fitLabel}</span>
+        <div class="ht">${read.title}</div>
+        <p>${EXEC_HEADLINE[band]}</p>
+      </div>
+      <div class="inside">
+        <span class="ik">Inside this document</span>
+        <ol class="inside-list">
+          <li><b>Your five answers</b>, in your own words, with what each one tells us.</li>
+          <li><b>What stands out</b> — the gaps between your answers that point to the real work.</li>
+          <li><b>The overall read</b> on where your business is right now.</li>
+          <li><b>Your next move</b> — exactly what to do from here.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- ===== THE FIVE DIMENSIONS (the substance) ===== -->
+    <div class="sectionhead">
+      <span class="eyebrow">The five dimensions</span>
+      <h2>What you said — and what it tells us</h2>
+      <p>The same diagnostic lens we use inside the program.</p>
+    </div>
     ${dims}
+    ${standoutHtml}
     <div class="readbox">
       <span class="eyebrow">The overall read</span>
       <h3>${read.title}</h3>
       <p>${read.body}</p>
     </div>
-    <div class="nextbox">
-      <h3>What happens next</h3>
-      <ul>
-        <li><b>Book your FORGE call</b> using the button on this page — we'll walk your results with you.</li>
-        <li><b>We review every intake</b> and will reach out to you directly.</li>
-        <li>Keep this document. It's your honest starting line — and the first artifact of the work.</li>
-      </ul>
+
+    <!-- ===== CLOSING (what you got + what to do next) ===== -->
+    <div class="closing">
+      <span class="eyebrow">Your next move</span>
+      <h2>What you have — and what to do with it</h2>
+      <p class="recap">You now hold an honest read on the five things that determine whether your business runs on a system or on you: your number, your growth engine, your team, your bottleneck, and your real goal — plus the gaps to close first. That's the starting line. Here's how to use it.</p>
+      <ol class="steps">
+        <li><b>Book your FORGE call</b><span>Click <em>"Book Your FORGE Call"</em> on this page and pick a time. We'll walk this diagnostic with you and tell you straight whether FORGE is the right fit for where you are.</span></li>
+        <li><b>Keep this document</b><span>Save the PDF. It's your honest baseline — and the first artifact of the work. Bring it to the call.</span></li>
+        <li><b>We'll reach out too</b><span>We review every intake. If we don't connect on the call first, we'll follow up directly.</span></li>
+      </ol>
     </div>
+
   </div>
-  <div class="doc-foot">FORGE — The 80/20 CEO Operating System · The 80/20 Institute · Built by Bill Canady · forge.the8020institute.com</div>`;
+  <div class="doc-foot">FORGE — The 80/20 CEO Operating System · The 80/20 Institute · forge.the8020institute.com</div>`;
   document.getElementById('doc').innerHTML = doc;
 }
 
@@ -467,10 +628,15 @@ function downloadPDF(){
 function submitToHubSpot(){
   const status = document.getElementById('saveStatus');
   const band = scoreBand();
-  const transcript = QUESTIONS.map((q,i)=>
-    `${q.kicker}\nQ: ${q.text}\nClosest: ${q.options.find(o=>o.v===answers[i].choice)?.label||'—'}\nIn their words: ${answers[i].text||'(left blank)'}\nRead: ${q.insight[answers[i].choice]||''}`
-  ).join('\n\n');
-  const message = `FORGE INTAKE — ${contact.firstname} ${contact.lastname} (${contact.company||'—'})\nOverall read: ${band.toUpperCase()} — ${OVERALL[band].title}\n\n${transcript}`;
+  const transcript = QUESTIONS.map((q,i)=>{
+    let blk=`${q.kicker}\nQ: ${q.text}\nClosest: ${q.options.find(o=>o.v===answers[i].choice)?.label||'—'}`;
+    if(answers[i].anchor) blk+=`\nFigure named: ${answers[i].anchor}`;
+    blk+=`\nIn their words: ${answers[i].text||'(left blank)'}\nRead: ${q.insight[answers[i].choice]||''}`;
+    return blk;
+  }).join('\n\n');
+  const cons = findContradictions();
+  const consText = cons.length ? `\n\nGAPS THAT STAND OUT:\n`+cons.map(x=>`• ${x.t}`).join('\n') : '';
+  const message = `FORGE INTAKE — ${contact.firstname} ${contact.lastname} (${contact.company||'—'})\nOverall read: ${band.toUpperCase()} — ${OVERALL[band].title}${consText}\n\n${transcript}`;
 
   if(!CONFIG.HUBSPOT_FORM_ID){
     console.log('[FORGE intake — demo mode] contact:',contact,'\n',message);
@@ -483,15 +649,19 @@ function submitToHubSpot(){
     {name:'email',value:contact.email},
     {name:'company',value:contact.company},
     {name:'phone',value:contact.phone},
-    {name:'message',value:message}
+    {name:'message',value:message},
+    {name:'forge_fit_band',value:band}   // routing: high/mid/low. Needs the forge_fit_band contact property; auto-retries without it if not yet created.
   ].filter(f=>f.value);
-  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${CONFIG.HUBSPOT_PORTAL_ID}/${CONFIG.HUBSPOT_FORM_ID}`,{
-    method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({fields,context:{pageUri:location.href,pageName:'FORGE Intake'}})
-  }).then(r=>{
-    status.textContent = r.ok ? 'Your results are saved and on their way to Bill.' : 'Saved locally — if you don’t hear back in 2 business days, email bill@the8020institute.com.';
-    if(r.ok) status.classList.add('ok');
-  }).catch(()=>{ status.textContent='Saved locally — email bill@the8020institute.com if you don’t hear back.'; });
+  const endpoint=`https://api.hsforms.com/submissions/v3/integration/submit/${CONFIG.HUBSPOT_PORTAL_ID}/${CONFIG.HUBSPOT_FORM_ID}`;
+  const post=fl=>fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:fl,context:{pageUri:location.href,pageName:'FORGE Intake'}})});
+  (async()=>{
+    try{
+      let r=await post(fields);
+      if(!r.ok){ r=await post(fields.filter(f=>f.name!=='forge_fit_band')); } // property may not exist yet — retry clean
+      status.textContent = r.ok ? 'Your results are saved and on their way to Bill.' : 'Saved locally — if you don’t hear back in 2 business days, email bill@the8020institute.com.';
+      if(r.ok) status.classList.add('ok');
+    }catch(e){ status.textContent='Saved locally — email bill@the8020institute.com if you don’t hear back.'; }
+  })();
 }
 </script>
 </body>

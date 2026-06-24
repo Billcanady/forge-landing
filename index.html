@@ -839,5 +839,31 @@ const CONFIG = {
 
 <!-- Senja Wall of Love — loads the live 80/20 Institute testimonial wall (written + video). -->
 <script async type="text/javascript" src="https://widget.senja.io/widget/cbeae6de-8cfd-4cfe-9f83-dc3e8f119198/platform.js"></script>
+
+<!-- Ad click-ID + UTM passing: carries gclid into the iClosed booking link for Google Ads attribution -->
+<script>
+(function () {
+  try {
+    var p = new URLSearchParams(location.search);
+    var keys = ['gclid','gbraid','wbraid','utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
+    var store = {};
+    try { store = JSON.parse(localStorage.getItem('ad_attr') || '{}'); } catch (e) {}
+    keys.forEach(function (k) { var v = p.get(k); if (v) store[k] = v; });
+    if (Object.keys(store).length) localStorage.setItem('ad_attr', JSON.stringify(store));
+    function decorate() {
+      document.querySelectorAll('a[href*="iclosed.io"]').forEach(function (a) {
+        try {
+          var u = new URL(a.href);
+          Object.keys(store).forEach(function (k) { if (!u.searchParams.get(k)) u.searchParams.set(k, store[k]); });
+          a.href = u.toString();
+        } catch (e) {}
+      });
+    }
+    decorate();
+    document.addEventListener('DOMContentLoaded', decorate);
+    setTimeout(decorate, 1500);
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
